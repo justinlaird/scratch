@@ -49,14 +49,14 @@ Resources:
             - Stack ${StackTagName} Environment ${EnvironmentTagName} Database ${ResourceName} VPC Security Group
             - ResourceName: New MySQL
       VpcId: !Ref DefaultVPCId
-  UpdateMySQL:
+  UpdateDB:
     Type: AWS::Serverless::Function
     Properties:
-      FunctionName: !Sub ${AWS::StackName}-UpdateMySQL
+      FunctionName: !Sub ${AWS::StackName}-UpdateDB
       Description: !Sub
         - Stack ${StackTagName} Environment ${EnvironmentTagName} Function ${ResourceName}
-        - ResourceName: UpdateMySQL
-      CodeUri: src/updateMySQL
+        - ResourceName: UpdateDB
+      CodeUri: src/updateDB
       Handler: index.handler
       Runtime: nodejs8.10
       MemorySize: 3008
@@ -64,18 +64,13 @@ Resources:
       Tracing: Active
       Policies:
         - AWSXrayWriteOnlyAccess
-      Environment:
-        Variables:
-          DB_ID: !Ref Database
-          DB_ADDRESS: !GetAtt Database.Endpoint.Address
-          DB_PORT: !GetAtt Database.Endpoint.Port
-          DB_ARN: !Sub arn:aws:rds:${AWS::Region}:${AWS::AccountId}:cluster:${Database}
     Metadata:
-      StackeryName: UpdateMySQL
-  UpdateMySQLDeployTrigger:
+      StackeryName: UpdateDB
+  UpdateDBDeployTrigger:
     Type: Custom::FunctionDeployTrigger
     Properties:
-      ServiceToken: !GetAtt UpdateMySQL.Arn
+      ServiceToken: !GetAtt UpdateDB.Arn
+      DeploymentTimestamp: !Ref DeploymentTimestamp
 Parameters:
   StackTagName:
     Type: String
@@ -89,3 +84,6 @@ Parameters:
   DefaultVPCSubnets:
     Type: List<AWS::EC2::Subnet::Id>
     Description: AWS account-specific default VPC subnets (injected by Stackery at deployment time)
+  DeploymentTimestamp:
+    Type: Number
+    Description: Deployment preparation timestamp in milliseconds Since Epoch (injected by Stackery at deployment time)
