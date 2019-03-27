@@ -27,6 +27,7 @@ Store.findOneResourceByFilter = async function(resourceName, filter) {
 
 Store.initializeDataForResource = function(resourceName, seeds) {
   const exampleData = require(`../sample-data/${require('path').basename(resourceName, '.js')}`);
+  console.log(`initialize data for resource ${resourceName} sample data: ${exampleData}`);
   const resource = this.resourceForKey(resourceName);
   resource.resourceConfig.examples = exampleData.concat(seeds.serialize(resourceName));
 }

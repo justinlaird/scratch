@@ -21,9 +21,11 @@ exports.handler = async message => {
     console.log("Initialize Populate DB complete");
 
   } catch (error) {
+    console.log("Error case");
     console.log(error);
     await cfnCR.sendFailure(error.message, message);
   } finally {
+    console.log("Finally case");
     await cfnCR.sendSuccess('UpdateMySQL completed', {}, message);
   }
   return {};
