@@ -9,8 +9,10 @@ exports.handler = async message => {
   console.log(message);
   try {
     console.log("Mr Magic Lambda");
-    console.log(`DB HOST ${config.get('database.host')}`);
-    console.log(`DB PORT ${config.get('database.port')}`);
+    console.log("Environment : ");
+    console.log(process.env);
+    //console.log(`DB HOST ${config.get('database.host')}`);
+    //console.log(`DB PORT ${config.get('database.port')}`);
 
    // jsonApiService.initialize(null, true);
    // jsonApiStore.populateDatabase();
