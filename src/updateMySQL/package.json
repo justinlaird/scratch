@@ -3,6 +3,7 @@
   "dependencies": {
     "aws-sdk": "~2",
     "cfn-custom-resource": "^4.0.11",
-    "xdam-clique-api": "file:../../xdam-clique-api"
+    "xdam-clique-api": "file:../../xdam-clique-api",
+    "config": "^3.0.0"
   }
 }
