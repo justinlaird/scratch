@@ -1,0 +1,25 @@
+#!/bin/bash
+
+set -o nounset
+set -o errexit
+
+# This removes duplication and allows testing what code build will do, locally.
+# It's called from buildspec.yml. The -e in the shebang will ensure we exit upon
+# failure.
+
+. ./scripts/config
+
+echo Logging in to Amazon ECR...
+aws --version
+$(aws ecr get-login --no-include-email --region $AWS_DEFAULT_REGION)
+echo Build started on `date`
+echo Building the Docker image...
+docker build -t $REPOSITORY_URI:latest .
+docker tag $REPOSITORY_URI:latest $REPOSITORY_URI:$IMAGE_TAG
+sh ./scripts/test
+echo Build completed on `date`
+echo Pushing the Docker images...
+docker push $REPOSITORY_URI:latest
+docker push $REPOSITORY_URI:$IMAGE_TAG
+echo Writing image definitions file...
+printf '[{"name":"xdam-clique-api","imageUri":"%s"}]' $REPOSITORY_URI:$IMAGE_TAG > imagedefinitions.json

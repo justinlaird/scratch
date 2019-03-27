@@ -1,0 +1,13 @@
+version: 0.2
+
+phases:
+  build:
+    commands:
+      - chmod 0755 ./bin/test
+      - chmod 0755 ./bin/cli.js
+      - sh ./scripts/build
+artifacts:
+  discard-paths: yes
+  files:
+    - imagedefinitions.json
+

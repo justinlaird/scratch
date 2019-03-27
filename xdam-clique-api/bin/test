@@ -1,0 +1,13 @@
+#!/bin/bash
+
+set -o nounset
+set -o errexit
+
+# Runs tests. This script is intended to be run inside the built environment.
+
+. ./scripts/config
+
+rm -rf ./node_modules
+yarn install --non-interactive
+./bin/cli.js db recreate --db-host $DB_HOST --db-user $DB_USER --db-password $DB_PASSWORD --db-name cliquetest
+yarn run test

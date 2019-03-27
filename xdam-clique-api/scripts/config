@@ -1,0 +1,38 @@
+#!/bin/bash
+
+export VERSION=$(echo $GIT_TAG_NAME | cut -s -d / -f 2)
+if [ -z "$VERSION" ]; then
+  export VERSION=$(git rev-parse HEAD | cut -c 1-8)
+fi
+
+## --- BEGIN ECS ENV vars ----- ##
+export SERVERLESS_S3_BUCKET_NAME='sls-clique-asset-pipeline-qa-assets-2'
+export SERVERLESS_AWS_REGION='us-west-2'
+export DB_HOST='clique-api-mysql.c8xqpbuucqbn.us-west-2.rds.amazonaws.com'
+export DB_USER='saasmasteradmin'
+export DB_PORT=3306
+export DB_NAME='clique'
+export SERVER_HOSTNAME='api.cliqueqa.com'
+export REDIS_ADDRESS=${REDIS_ADDRESS:='clique-redis.2fifuj.0001.usw2.cache.amazonaws.com'}
+
+# export SERVER_PORT=16006
+# export SERVER_PROTOCOL='https'
+
+# these are from from .envrc, aliased to make running tests locally, against
+# remote DB easy, just like code build, if you have direnv installed, w/ a .envrc file
+export DB_PASSWORD=${PROD_DB_PASSWORD:=$DB_PASSWORD}
+export SERVERLESS_AWS_ACCESS_KEY_ID=${PROD_SERVERLESS_AWS_ACCESS_KEY_ID:=$SERVERLESS_AWS_ACCESS_KEY_ID}
+export SERVERLESS_AWS_SECRET_ACCESS_KEY=${PROD_SERVERLESS_AWS_SECRET_ACCESS_KEY:=$SERVERLESS_AWS_SECRET_ACCESS_KEY}
+export KEYMETRICS_PUBLIC=${PROD_KEYMETRICS_PUBLIC:=$KEYMETRICS_PUBLIC}
+export KEYMETRICS_SECRET=${PROD_KEYMETRICS_SECRET:=$KEYMETRICS_SECRET}
+export AWS_ACCESS_KEY_ID=${PROD_AWS_ACCESS_KEY_ID:=$AWS_ACCESS_KEY_ID}
+export AWS_SECRET_ACCESS_KEY=${PROD_AWS_SECRET_ACCESS_KEY:=$AWS_SECRET_ACCESS_KEY}
+## --- END ECS ENV vars ----- ##
+
+## normally placed in buildspec, but put here to minimize duplication
+export AWS_DEFAULT_REGION=us-west-2
+export REPOSITORY_URI='122137487413.dkr.ecr.us-west-2.amazonaws.com/xdam-clique-api'
+export IMAGE_TAG=${VERSION:=latest}
+
+## TODO: cfn-stack
+# export STACK_NAME='clique-api-qa-stack'

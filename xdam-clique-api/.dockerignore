@@ -1,0 +1,16 @@
+node_modules
+
+# prevent copying over .gitignored files when testing build pipeline locally
+.env
+.envrc
+
+# may contain sensitive information
+yarn-error.log
+
+.DS_Store
+logs/
+coverage.html
+ssl/
+*.sublime-*
+.idea/
+.vscode/

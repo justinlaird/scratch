@@ -1,0 +1,27 @@
+#!/bin/sh -eux
+
+. ./scripts/config
+
+docker-compose build
+
+# Always clean up the docker containers after the command executes,
+# but keep track of its exit code.
+docker-compose run api sh bin/test "$@"
+CMD_CODE=$?
+
+if [ $CMD_CODE -ne 0 ]; then
+    exit $CMD_CODE
+else
+    docker-compose down
+    TEARDOWN_CODE=$?
+
+    # Return the exit code of the docker-compose stop command, if non-zero.
+    # Otherwise, return the exit code of the command that was run.
+    if [ $TEARDOWN_CODE -ne 0 ]; then
+        exit $TEARDOWN_CODE
+    else
+        exit $CMD_CODE
+    fi
+fi
+
+

@@ -1,0 +1,20 @@
+#!/bin/bash
+
+set -o nounset
+set -o errexit
+
+# Runs api. This script is intended to be run inside the built environment.
+
+. ./scripts/config
+
+echo Cleaning node_modules...
+rm -rf ./node_modules
+echo Installing pm2 and its plugins...
+npm i -g pm2
+pm2 install pm2-logrotate
+pm2 install pm2-server-monit
+pm2 link $KEYMETRICS_PUBLIC $KEYMETRICS_SECRET
+echo Installing yarn production deps...
+yarn install --non-interactive --prefer-offline
+echo Starting server...
+yarn run start:prod:docker

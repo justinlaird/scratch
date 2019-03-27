@@ -1,0 +1,23 @@
+#!/bin/bash
+
+set -o nounset
+set -o errexit
+
+# Convenience script, simply run ./scripts/startup from where needed, locally,
+# CodeDeploy, manual task definition, et al.)
+
+. ./scripts/config
+
+## The following are all the same, one is easier than the rest. Leaving for
+## reference for team (and my future self).
+
+## a)
+# docker-compose build
+# docker-compose run -p 16006:16006 -p 80:80 -p 43554:43554 api sh bin/startup "$@"
+
+## b)
+# docker build -t xdam-clique-api .
+# docker run -d -p 16006:16006 -p 80:80 -p 43554:43554 xdam-clique-api
+
+## c)
+docker-compose up --build
