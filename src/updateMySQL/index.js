@@ -18,5 +18,3 @@ exports.handler = async message => {
   }
   return {};
 }
-
- exports.handler("THE message is this!");
