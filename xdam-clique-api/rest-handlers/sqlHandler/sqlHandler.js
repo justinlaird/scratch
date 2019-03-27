@@ -95,7 +95,7 @@ SqlStore.prototype.initialise = function (resourceConfig) {
 }
 
 SqlStore.prototype.populate = function (options, callback) {
-  console.log(`Populate called for ${this}!!!`);
+  console.log(`Populate called for ${this.name}!!!`);
   if (typeof options === 'function') {
     callback = options
     options = {}
@@ -129,6 +129,7 @@ SqlStore.prototype.populate = function (options, callback) {
     },
   ]
 
+  console.log("Calling async series!");
   async.series(tasks, callback)
 }
 
