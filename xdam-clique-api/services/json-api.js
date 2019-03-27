@@ -12,6 +12,8 @@ const _ = {
 const JsonApiService = {};
 
 JsonApiService.initialize = function(router, createDb = false) {
+  console.log("!!! CALLED JsonApiService.initialize !!!");
+
   jsonApi.setConfig({
     router: router,
     graphiql: true,
