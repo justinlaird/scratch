@@ -8,7 +8,7 @@ Resources:
       DBSubnetGroupName: !Ref DatabaseSubnetGroup
       Engine: mysql
       MasterUsername: root
-      MasterUserPassword: sjs728*sh344G$
+      MasterUserPassword: !Ref EnvConfigmySQLPasswordAsString
       AllocatedStorage: '5'
       AllowMajorVersionUpgrade: true
       AutoMinorVersionUpgrade: true
@@ -69,7 +69,7 @@ Resources:
           DB_ID: !Ref Database
           DB_ADDRESS: !GetAtt Database.Endpoint.Address
           DB_PORT: !GetAtt Database.Endpoint.Port
-          DB_ARN: !Sub arn:aws:rds:${AWS::Region}:${AWS::AccountId}:cluster:${Database}
+          DB_ARN: !Sub arn:aws:rds:${AWS::Region}:${AWS::AccountId}:db:${Database}
     Metadata:
       StackeryName: UpdateMySQL
   UpdateMySQLDeployTrigger:
@@ -93,3 +93,9 @@ Parameters:
   DeploymentTimestamp:
     Type: Number
     Description: Deployment preparation timestamp in milliseconds Since Epoch (injected by Stackery at deployment time)
+  EnvConfigmySQLPasswordAsString:
+    Type: AWS::SSM::Parameter::Value<String>
+    Default: /<EnvironmentName>/mySQLPassword
+Metadata:
+  EnvConfigParameters:
+    EnvConfigmySQLPasswordAsString: mySQLPassword
