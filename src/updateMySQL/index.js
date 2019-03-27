@@ -11,7 +11,7 @@ exports.handler = async message => {
     console.log("Mr Magic Lambda");
     console.log("Environment : ");
     console.log(process.env);
-    //console.log(`DB HOST ${config.get('database.host')}`);
+    console.log(`DB HOST ${config.get('database.host')}`);
     //console.log(`DB PORT ${config.get('database.port')}`);
 
    // jsonApiService.initialize(null, true);
