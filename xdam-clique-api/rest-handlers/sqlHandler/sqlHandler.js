@@ -123,6 +123,7 @@ SqlStore.prototype.populate = function (options, callback) {
       async.eachSeries(self.resourceConfig.examples, function (exampleJson, ecb) {
         var validation = Joi.validate(exampleJson, self.resourceConfig.attributes)
         if (validation.error) return ecb(validation.error)
+        console.log(`Create called for ${self.resourceConfig.resource}`);
         self.create({ request: { type: self.resourceConfig.resource } }, validation.value, ecb)
       }, cb)
     },
