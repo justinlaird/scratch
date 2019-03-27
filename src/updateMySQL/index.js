@@ -12,7 +12,7 @@ exports.handler = async message => {
     console.log("Environment : ");
     console.log(process.env);
     console.log(`DB HOST ${config.get('database.host')}`);
-    //console.log(`DB PORT ${config.get('database.port')}`);
+    console.log(`DB PORT ${config.get('database.port')}`);
 
    // jsonApiService.initialize(null, true);
    // jsonApiStore.populateDatabase();

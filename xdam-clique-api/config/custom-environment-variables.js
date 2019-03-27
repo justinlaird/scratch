@@ -1,6 +1,6 @@
 module.exports = {
   "database": {
-    "host": "DB_ADDRESS",
+    "host": "DB_HOST",
     "port": "DB_PORT",
     "databaseName": "DB_NAME",
     "username": "DB_USER",
