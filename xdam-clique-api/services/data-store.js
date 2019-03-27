@@ -42,6 +42,8 @@ Store.populateDatabase = async function () {
   await this.resourceKeys().forEach(async function(resourceName) {
       _this.initializeDataForResource(resourceName, seeds);
       const resource = _this.resourceForKey(resourceName);
+      console.log(`Resource for ${resource}`);
+      console.log(resource);
       const populateAsync = Promise.promisify(resource.populate, { context: resource });
       try {
         await populateAsync({force: true});

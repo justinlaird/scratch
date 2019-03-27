@@ -95,6 +95,7 @@ SqlStore.prototype.initialise = function (resourceConfig) {
 }
 
 SqlStore.prototype.populate = function (options, callback) {
+  console.log(`Populate called for ${this}!!!`);
   if (typeof options === 'function') {
     callback = options
     options = {}
