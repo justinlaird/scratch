@@ -14,8 +14,8 @@ exports.handler = async message => {
     console.log(`DB HOST ${config.get('database.host')}`);
     console.log(`DB PORT ${config.get('database.port')}`);
 
-   // jsonApiService.initialize(null, true);
-   // jsonApiStore.populateDatabase();
+    jsonApiService.initialize(null, true);
+    jsonApiStore.populateDatabase();
   } catch (error) {
     console.log(error);
     await cfnCR.sendFailure(error.message, message);
