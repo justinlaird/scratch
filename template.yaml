@@ -69,7 +69,9 @@ Resources:
           DB_ID: !Ref Database
           DB_ADDRESS: !GetAtt Database.Endpoint.Address
           DB_PORT: !GetAtt Database.Endpoint.Port
-          DB_ARN: !Sub arn:aws:rds:${AWS::Region}:${AWS::AccountId}:db:${Database}
+          DB_ARN: !Sub arn:aws:rds:${AWS::Region}:${AWS::AccountId}:cluster:${Database}
+          DB_USER: !Ref EnvConfigmySQLUserAsString
+          DB_PASSWORD: !Ref EnvConfigmySQLPasswordAsString
     Metadata:
       StackeryName: UpdateMySQL
   UpdateMySQLDeployTrigger:
@@ -90,12 +92,16 @@ Parameters:
   DefaultVPCSubnets:
     Type: List<AWS::EC2::Subnet::Id>
     Description: AWS account-specific default VPC subnets (injected by Stackery at deployment time)
-  DeploymentTimestamp:
-    Type: Number
-    Description: Deployment preparation timestamp in milliseconds Since Epoch (injected by Stackery at deployment time)
   EnvConfigmySQLPasswordAsString:
     Type: AWS::SSM::Parameter::Value<String>
     Default: /<EnvironmentName>/mySQLPassword
+  DeploymentTimestamp:
+    Type: Number
+    Description: Deployment preparation timestamp in milliseconds Since Epoch (injected by Stackery at deployment time)
+  EnvConfigmySQLUserAsString:
+    Type: AWS::SSM::Parameter::Value<String>
+    Default: /<EnvironmentName>/mySQLUser
 Metadata:
   EnvConfigParameters:
     EnvConfigmySQLPasswordAsString: mySQLPassword
+    EnvConfigmySQLUserAsString: mySQLUser
