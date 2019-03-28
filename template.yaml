@@ -79,6 +79,52 @@ Resources:
     Properties:
       ServiceToken: !GetAtt UpdateMySQL.Arn
       DeploymentTimestamp: !Ref DeploymentTimestamp
+  Api:
+    Type: AWS::Serverless::Api
+    Properties:
+      Name: !Sub
+        - ${ResourceName} From Stack ${StackTagName} Environment ${EnvironmentTagName}
+        - ResourceName: RestAPI
+      StageName: !Ref EnvironmentAPIGatewayStageName
+      DefinitionBody:
+        swagger: '2.0'
+        info: {}
+        paths:
+          /rest:
+            get:
+              x-amazon-apigateway-integration:
+                httpMethod: POST
+                type: aws_proxy
+                uri: !Sub arn:aws:apigateway:${AWS::Region}:lambda:path/2015-03-31/functions/${RestAPI.Arn}/invocations
+              responses: {}
+      EndpointConfiguration: REGIONAL
+      TracingEnabled: true
+    Metadata:
+      StackeryName: RestAPI
+  RestAPI:
+    Type: AWS::Serverless::Function
+    Properties:
+      FunctionName: !Sub ${AWS::StackName}-RestAPI
+      Description: !Sub
+        - Stack ${StackTagName} Environment ${EnvironmentTagName} Function ${ResourceName}
+        - ResourceName: RestAPI
+      CodeUri: src/restAPI
+      Handler: index.handler
+      Runtime: nodejs8.10
+      MemorySize: 3008
+      Timeout: 30
+      Tracing: Active
+      Policies:
+        - AWSXrayWriteOnlyAccess
+      Events:
+        ApiGETrest:
+          Type: Api
+          Properties:
+            Path: /rest
+            Method: GET
+            RestApiId: !Ref Api
+    Metadata:
+      StackeryName: RestAPI
 Parameters:
   StackTagName:
     Type: String
@@ -101,6 +147,9 @@ Parameters:
   DeploymentTimestamp:
     Type: Number
     Description: Deployment preparation timestamp in milliseconds Since Epoch (injected by Stackery at deployment time)
+  EnvironmentAPIGatewayStageName:
+    Type: String
+    Description: Environment name used for API Gateway Stage names (injected by Stackery at deployment time)
 Metadata:
   EnvConfigParameters:
     EnvConfigmySQLPasswordAsString: mySQLPassword
