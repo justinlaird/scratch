@@ -99,6 +99,10 @@ Resources:
               responses: {}
           /rest/:
             x-amazon-apigateway-any-method:
+              x-amazon-apigateway-integration:
+                httpMethod: POST
+                type: aws_proxy
+                uri: !Sub arn:aws:apigateway:${AWS::Region}:lambda:path/2015-03-31/functions/${RestAPI.Arn}/invocations
               responses: {}
       EndpointConfiguration: REGIONAL
       TracingEnabled: true
@@ -124,6 +128,12 @@ Resources:
           Type: Api
           Properties:
             Path: /rest/{any+}
+            Method: ANY
+            RestApiId: !Ref Api
+        ApiANYrest:
+          Type: Api
+          Properties:
+            Path: /rest/
             Method: ANY
             RestApiId: !Ref Api
       Environment:
