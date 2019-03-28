@@ -40,4 +40,4 @@ exports.handler = async message => {
 }
 
 
-exports.handler("THE message is this!");
+//exports.handler("THE message is this!");
