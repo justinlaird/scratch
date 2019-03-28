@@ -90,8 +90,8 @@ Resources:
         swagger: '2.0'
         info: {}
         paths:
-          /rest:
-            get:
+          /rest/{any+}:
+            x-amazon-apigateway-any-method:
               x-amazon-apigateway-integration:
                 httpMethod: POST
                 type: aws_proxy
@@ -117,12 +117,18 @@ Resources:
       Policies:
         - AWSXrayWriteOnlyAccess
       Events:
-        ApiGETrest:
+        ApiANYrestany:
           Type: Api
           Properties:
-            Path: /rest
-            Method: GET
+            Path: /rest/{any+}
+            Method: ANY
             RestApiId: !Ref Api
+      Environment:
+        Variables:
+          DB_ID: !Ref Database
+          DB_ADDRESS: !GetAtt Database.Endpoint.Address
+          DB_PORT: !GetAtt Database.Endpoint.Port
+          DB_ARN: !Sub arn:aws:rds:${AWS::Region}:${AWS::AccountId}:cluster:${Database}
     Metadata:
       StackeryName: RestAPI
 Parameters:
