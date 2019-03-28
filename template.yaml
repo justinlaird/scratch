@@ -97,6 +97,9 @@ Resources:
                 type: aws_proxy
                 uri: !Sub arn:aws:apigateway:${AWS::Region}:lambda:path/2015-03-31/functions/${RestAPI.Arn}/invocations
               responses: {}
+          /rest/:
+            x-amazon-apigateway-any-method:
+              responses: {}
       EndpointConfiguration: REGIONAL
       TracingEnabled: true
     Metadata:
