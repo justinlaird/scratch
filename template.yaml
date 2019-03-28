@@ -60,7 +60,7 @@ Resources:
       Handler: index.handler
       Runtime: nodejs8.10
       MemorySize: 3008
-      Timeout: 30
+      Timeout: 600
       Tracing: Active
       Policies:
         - AWSXrayWriteOnlyAccess
@@ -95,12 +95,12 @@ Parameters:
   EnvConfigmySQLPasswordAsString:
     Type: AWS::SSM::Parameter::Value<String>
     Default: /<EnvironmentName>/mySQLPassword
-  DeploymentTimestamp:
-    Type: Number
-    Description: Deployment preparation timestamp in milliseconds Since Epoch (injected by Stackery at deployment time)
   EnvConfigmySQLUserAsString:
     Type: AWS::SSM::Parameter::Value<String>
     Default: /<EnvironmentName>/mySQLUser
+  DeploymentTimestamp:
+    Type: Number
+    Description: Deployment preparation timestamp in milliseconds Since Epoch (injected by Stackery at deployment time)
 Metadata:
   EnvConfigParameters:
     EnvConfigmySQLPasswordAsString: mySQLPassword
