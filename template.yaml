@@ -124,6 +124,8 @@ Resources:
           DB_ADDRESS: !GetAtt Database.Endpoint.Address
           DB_PORT: !GetAtt Database.Endpoint.Port
           DB_ARN: !Sub arn:aws:rds:${AWS::Region}:${AWS::AccountId}:cluster:${Database}
+          DB_USER: !Ref EnvConfigmySQLUserAsString
+          DB_PASSWORD: !Ref EnvConfigmySQLPasswordAsString
       Events:
         ApiANYany:
           Type: Api
