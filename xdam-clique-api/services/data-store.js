@@ -47,6 +47,7 @@ Store.populateDatabase = async function () {
       const populateAsync = Promise.promisify(resource.populate, { context: resource });
       try {
         await populateAsync({force: true});
+        //await resource.populate2({force: true});
         console.log(`store.populate ${resourceName} completed`);
       } catch (error) {
         console.log(`store.populate ${resourceName} error:`);
