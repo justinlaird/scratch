@@ -29,12 +29,13 @@ exports.handler = async message => {
     console.log(userResource);
     jsonApiStore.populateDatabase();
     await delay(10 * 60 * 1000);
+    console.log("Finished Delay");
   } catch (error) {
     console.log("Error during UpdateMySQL");
     console.log(error);
     await cfnCR.sendFailure(error.message, message);
   } finally {
-    await cfnCR.sendSuccess('UpdateMySQL completed', {}, message);
+    await cfnCR.sendSuccess('UpdateMySQL process completed', {}, message);
   }
   return {};
 }
