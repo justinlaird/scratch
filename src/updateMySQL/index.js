@@ -3,37 +3,41 @@ const jsonApiStore = require('xdam-clique-api/services/data-store');
 const jsonApiService = require('xdam-clique-api//services/json-api');
 const config = require('config');
 const delay = require('delay');
-
+const Sequelize = require('sequelize');
 
 
 
 exports.handler = async message => {
   console.log(message);
   try {
-    console.log("Mr Magic Lambda");
-    console.log("Environment : ");
     console.log(process.env);
-    console.log(`DB HOST ${config.get('database.host')}`);
-    console.log(`DB PORT ${config.get('database.port')}`);
 
-    console.log("Initialize JSONAPI");
+    const sequelize = new Sequelize(
+      'mysql',
+      config.get('database.username'),
+      config.get('database.password'),
+      {
+        host: config.get('database.host'),
+        dialect: config.get('database.dialect')
+      }
+    );
+
+    await sequelize.query(`CREATE DATABASE IF NOT EXISTS ${config.get('database.databaseName')}`);
     jsonApiService.initialize(null, true);
-    console.log("Initialize Populate DB");
+    const userResource = jsonApiStore.resourceForKey('users');
+    console.log("User resource :");
+    console.log(userResource);
     jsonApiStore.populateDatabase();
-    console.log("Initialize Populate DB complete");
-    await delay(180000);
-    console.log("After delay!");
-
+    //await delay(180000);
   } catch (error) {
-    console.log("Error case");
+    console.log("Error during UpdateMySQL");
     console.log(error);
     await cfnCR.sendFailure(error.message, message);
   } finally {
-    console.log("Finally case");
     await cfnCR.sendSuccess('UpdateMySQL completed', {}, message);
   }
   return {};
 }
 
 
-//exports.handler("THE message is this!");
+exports.handler("THE message is this!");

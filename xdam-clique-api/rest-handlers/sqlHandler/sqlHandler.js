@@ -94,9 +94,7 @@ SqlStore.prototype.initialise = function (resourceConfig) {
   self.ready = true
 }
 
-
 SqlStore.prototype.populate = function (options, callback) {
-  console.log(`Populate called for ${this.name}!!!`);
   if (typeof options === 'function') {
     callback = options
     options = {}
@@ -106,17 +104,12 @@ SqlStore.prototype.populate = function (options, callback) {
 
   var tasks = [
     function (cb){
-      console.log('Task 1');
       self.sequelize.query('SET FOREIGN_KEY_CHECKS = 0', null, options).asCallback(cb)
     },
     function (cb) {
-      console.log('Task 2');
-
       self.baseModel.sync(options).asCallback(cb)
     },
     function (cb) {
-      console.log('Task 3');
-
       let filteredRelationArray = self.relationArray.filter(function (eachRelation) {
         return !eachRelation.isBelongsTo;
       });
@@ -126,9 +119,6 @@ SqlStore.prototype.populate = function (options, callback) {
       }, cb)
     },
     function (cb) {
-
-      console.log('Task 4');
-
       async.eachSeries(self.resourceConfig.examples, function (exampleJson, ecb) {
         var validation = Joi.validate(exampleJson, self.resourceConfig.attributes)
         if (validation.error) return ecb(validation.error)
