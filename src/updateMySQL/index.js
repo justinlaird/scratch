@@ -2,12 +2,10 @@ const cfnCR = require('cfn-custom-resource');
 const jsonApiStore = require('xdam-clique-api/services/data-store');
 const jsonApiService = require('xdam-clique-api//services/json-api');
 const config = require('config');
+const delay = require('delay');
 
 
 
-function reportComplete() {
-  console.log('Finished DB initialization');
-}
 
 exports.handler = async message => {
   console.log(message);
@@ -23,8 +21,8 @@ exports.handler = async message => {
     console.log("Initialize Populate DB");
     jsonApiStore.populateDatabase();
     console.log("Initialize Populate DB complete");
-
-    setTimeout(reportComplete, 180000);
+    await delay(180000);
+    console.log("After delay!");
 
   } catch (error) {
     console.log("Error case");
