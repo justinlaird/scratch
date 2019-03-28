@@ -60,7 +60,7 @@ Resources:
       Handler: index.handler
       Runtime: nodejs8.10
       MemorySize: 3008
-      Timeout: 600
+      Timeout: 900
       Tracing: Active
       Policies:
         - AWSXrayWriteOnlyAccess
