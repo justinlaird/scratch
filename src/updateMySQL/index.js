@@ -5,8 +5,6 @@ const config = require('config');
 const delay = require('delay');
 const Sequelize = require('sequelize');
 
-
-
 exports.handler = async message => {
   console.log(message);
   try {
@@ -21,12 +19,8 @@ exports.handler = async message => {
         dialect: config.get('database.dialect')
       }
     );
-
     await sequelize.query(`CREATE DATABASE IF NOT EXISTS ${config.get('database.databaseName')}`);
     jsonApiService.initialize(null, true);
-    const userResource = jsonApiStore.resourceForKey('users');
-    console.log("User resource :");
-    console.log(userResource);
     jsonApiStore.populateDatabase();
     await delay(10 * 60 * 1000);
     console.log("Finished Delay");

@@ -1,11 +1,38 @@
-const serverless = require('serverless-http');
 
-//const jsonApiServer = require('xdam-clique-api/jsonapi-server');
-//exports.handler = serverless(jsonApiServer);
+/*
+const jsonApiServer = require('xdam-clique-api');
+
+
+module.exports = function handler(message) {
+  let request = {
+        method: message.method,
+        url: message.pathname,
+        headers: message.headers,
+        payload: message.body,
+        remoteAddress: message.ip
+      }
+
+  return jsonApiServer.initialize()
+    .then(() => jsonApiServer.inject(request))
+    .then((response) => {
+      return {
+        statusCode: response.statusCode,
+        headers: response.headers,
+        body: response.rawPayload
+      }
+    })
+}
+*/
+
 
 
 
 /*
+
+const serverless = require('serverless-http');
+
+//const jsonApiServer = require('xdam-clique-api/jsonapi-server');
+//exports.handler = serverless(jsonApiServer);
 const {JsonApiController} = require('xdam-clique-api/controllers');
 const express = require('express');
 const bodyParser = require('body-parser');
@@ -21,6 +48,11 @@ module.exports.handler = serverless(app);
 
 
 
+
+
+//basic hello world with serverless
+const serverless = require('serverless-http');
+
 const express = require('express');
 const app = express();
 
@@ -31,6 +63,10 @@ app.get('/rest/users', function (req, res) {
 })
 
 module.exports.handler = serverless(app);
+
+
+
+
 
 
 /*
