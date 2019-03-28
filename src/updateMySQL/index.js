@@ -5,6 +5,10 @@ const config = require('config');
 
 
 
+function reportComplete() {
+  console.log('Finished DB initialization');
+}
+
 exports.handler = async message => {
   console.log(message);
   try {
@@ -19,6 +23,8 @@ exports.handler = async message => {
     console.log("Initialize Populate DB");
     jsonApiStore.populateDatabase();
     console.log("Initialize Populate DB complete");
+
+    setTimeout(reportComplete, 180000);
 
   } catch (error) {
     console.log("Error case");
