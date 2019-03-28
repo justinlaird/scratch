@@ -28,7 +28,7 @@ exports.handler = async message => {
     console.log("User resource :");
     console.log(userResource);
     jsonApiStore.populateDatabase();
-    //await delay(180000);
+    await delay(180000);
   } catch (error) {
     console.log("Error during UpdateMySQL");
     console.log(error);
