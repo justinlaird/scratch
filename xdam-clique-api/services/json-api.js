@@ -65,7 +65,9 @@ JsonApiService.initialize = function(router, createDb = false) {
     }, undefined, 2))
   });
 
+  console.log("Before jsonapi start");
   jsonApi.start();
+  console.log("After jsonapi start");
 
   this._resourceDataStores = _.mapValues(jsonApi._resources, 'store');
   _.invokeMap(this._resourceDataStores, 'defineRelationModels', this._resourceDataStores, createDb);
@@ -78,7 +80,7 @@ JsonApiService.resourceDataStores = function() {
   return this._resourceDataStores;
 };
 
-
+console.log("Before module export ");
 module.exports = JsonApiService;
 
 /*
