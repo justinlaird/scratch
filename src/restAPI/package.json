@@ -1,6 +1,10 @@
 {
   "private": true,
   "dependencies": {
-    "aws-sdk": "~2"
+    "aws-sdk": "~2",
+    "body-parser": "^1.18.3",
+    "express": "^4.16.4",
+    "serverless-http": "^1.9.1",
+    "xdam-clique-api": "file:../../xdam-clique-api"
   }
 }
