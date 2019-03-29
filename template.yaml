@@ -143,6 +143,42 @@ Resources:
             RestApiId: !Ref Api
     Metadata:
       StackeryName: RestAPI
+  DeployFrontEnd:
+    Type: AWS::Serverless::Function
+    Properties:
+      FunctionName: !Sub ${AWS::StackName}-DeployFrontEnd
+      Description: !Sub
+        - Stack ${StackTagName} Environment ${EnvironmentTagName} Function ${ResourceName}
+        - ResourceName: DeployFrontEnd
+      CodeUri: src/deployFrontEnd
+      Handler: index.handler
+      Runtime: nodejs8.10
+      MemorySize: 3008
+      Timeout: 900
+      Tracing: Active
+      Policies:
+        - AWSXrayWriteOnlyAccess
+        - S3CrudPolicy:
+            BucketName: !Ref EmberApp
+      Environment:
+        Variables:
+          BUCKET_NAME: !Ref EmberApp
+          BUCKET_ARN: !GetAtt EmberApp.Arn
+    Metadata:
+      StackeryName: DeployFrontEnd
+  DeployFrontEndDeployTrigger:
+    Type: Custom::FunctionDeployTrigger
+    Properties:
+      ServiceToken: !GetAtt DeployFrontEnd.Arn
+      DeploymentTimestamp: !Ref DeploymentTimestamp
+  EmberApp:
+    Type: AWS::S3::Bucket
+    Properties:
+      BucketName: !Sub ${AWS::StackName}-emberapp
+      WebsiteConfiguration:
+        IndexDocument: index.html
+    Metadata:
+      StackeryName: EmberApp
 Parameters:
   StackTagName:
     Type: String
@@ -168,6 +204,9 @@ Parameters:
   EnvConfigapiHostNameAsString:
     Type: AWS::SSM::Parameter::Value<String>
     Default: /<EnvironmentName>/apiHostName
+  DeploymentTimestamp:
+    Type: Number
+    Description: Deployment preparation timestamp in milliseconds Since Epoch (injected by Stackery at deployment time)
 Metadata:
   EnvConfigParameters:
     EnvConfigmySQLPasswordAsString: mySQLPassword
