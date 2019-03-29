@@ -101,7 +101,6 @@ Resources:
               responses: {}
       EndpointConfiguration: REGIONAL
       TracingEnabled: true
-      Cors: '''*'''
     Metadata:
       StackeryName: RestAPI
   RestAPI:
