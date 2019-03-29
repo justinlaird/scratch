@@ -1,0 +1,12 @@
+{{#xui-form changeset=(changeset user LoginValidations)
+            save=(action "submitLogin") as |form|}}
+      <h6 class="mdc-typography--headline3">{{t "login.title"}}</h6>
+      <p>{{t "login.message"}}</p>
+
+  {{form.field data-test-login-username label=(t "login.username") type="username" value=(mut form.changeset.username)}}
+  {{form.field data-test-login-password label=(t "login.password") type="password" value=(mut form.changeset.password)}}
+
+  <button data-test-login-button
+          {{action form.save form.changeset}}
+          class="mdc-button mdc-button--outlined">{{t "login.action"}}<</button>
+{{/xui-form}}

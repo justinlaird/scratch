@@ -1,0 +1,7 @@
+{{#xui-file-dropzone model=model folderId=model.id isSidebar=true}}
+  {{yield (hash
+    menuItems=menuItems
+    hasSubItems=hasSubItems
+    toggle=(action "toggle")
+  )}}
+{{/xui-file-dropzone}}

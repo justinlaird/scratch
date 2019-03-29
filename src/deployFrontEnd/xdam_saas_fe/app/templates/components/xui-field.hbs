@@ -1,0 +1,17 @@
+{{#if @icon}}
+  {{svg-jar @icon class="xui-icon mdc-text-field__icon"}}
+{{/if}}
+
+{{input
+  keyDown=(action (optional handleKeyDown))
+  class="mdc-text-field__input"
+  type=@type
+  label=@label
+  value=@value
+  placeholder=@placeholder
+  tabindex=tabindex
+}}
+
+{{#if @label}}
+  <label for={{@label}} class="mdc-floating-label">{{@label}}</label>
+{{/if}}

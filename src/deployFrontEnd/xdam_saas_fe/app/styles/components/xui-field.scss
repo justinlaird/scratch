@@ -1,0 +1,66 @@
+$xui-field-active: map-get($xui-colors, primary);
+$xui-field-border-color: rgba(white, 0.05);
+
+$xui-field-focus-background: rgba(white, 0.05);
+
+$xui-field-value: map-get($xui-colors, white-darken-1);
+$xui-field-label: map-get($xui-colors, white-darken-2);
+$xui-field-active-value: map-get($xui-colors, white);
+
+.xui-field {
+  // Mixins for all Text Fields
+  @include mdc-text-field-label-color($xui-field-label);
+  @include mdc-text-field-caret-color($xui-field-active);
+  @include mdc-text-field-fill-color(transparent);
+
+  // Mixins for Filled Text Field
+  @include mdc-text-field-ink-color($xui-field-value);
+  @include mdc-text-field-shape-radius($xui-global-radius);
+  @include mdc-text-field-bottom-line-color($xui-field-border-color);
+  @include mdc-text-field-hover-bottom-line-color($xui-field-active);
+
+  // Mixins for Outlined Text Field
+  @include mdc-text-field-focused-outline-color($xui-field-active);
+  @include mdc-text-field-hover-outline-color($xui-field-active);
+  @include mdc-text-field-outline-color($xui-field-border-color);
+  @include mdc-text-field-outline-shape-radius($xui-global-radius);
+
+  // Mixins for Textarea
+  @include mdc-text-field-textarea-shape-radius($xui-global-radius);
+  @include mdc-text-field-textarea-fill-color(transparent);
+  @include mdc-text-field-textarea-stroke-color($xui-field-border-color);
+
+  // Mixins for Text Field Full width
+  @include mdc-text-field-fullwidth-bottom-line-color($xui-field-border-color);
+
+  /* ============= Begin Modifying Default Appearance ============= */
+
+  .mdc-text-field__input {
+    border-bottom-width: 2px;
+  }
+
+  svg {
+    fill: $xui-field-label;
+  }
+
+  /* ============= End Modifying Default Appearance ============= */
+
+  /* ============= Begin Focus/Hover State ============= */
+
+  &.mdc-text-field--focused,
+  &:hover {
+    &::before {
+      opacity: 0.08;
+    }
+
+    .mdc-text-field__input {
+      border-bottom-color: $xui-field-active !important;
+    }
+
+    svg {
+      fill: $xui-field-active;
+    }
+  }
+
+  /* ============= End Focus/Hover State ============= */
+}

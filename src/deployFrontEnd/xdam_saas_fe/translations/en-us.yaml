@@ -1,0 +1,141 @@
+#
+# i18n strings
+# -----------------------
+#
+# IMPORTANT! GUIDE TO ADDING STRINGS:
+# - Translations are organized into the following sections based on where the strings are used:
+#    1. Globals: Never used in hbs templates. Only nested in route & component translations. Prefixed with "global".
+#    2. Components: Strings consumed in components directory. Prefixed with directory path of component
+#    3. Routes: Strings consumed in routes. Prefixed with directory path of route.
+# - Use dasherized keys for readability.
+#
+# -----------------------
+#
+# Translations will serve two purposes:
+# 1. Translating text (duh)
+# 2. Modifying client specific string settings. Translations may be stored externally & fetched
+# on a client by client case to modify a limited subset of verbiage through the app.
+#
+# -----------------------
+#
+# Basic Usage:
+# {@link https://github.com/ember-intl/ember-intl/blob/master/docs/translating-text.md}
+#
+# Date & Time Usage:
+# {@link https://github.com/ember-intl/ember-intl/blob/master/docs/format-date-time-options.md}
+#
+# Intl Package:
+# {@link https://github.com/ember-intl/ember-intl}
+#
+
+# ============================================
+# ================= Globals ==================
+# ============================================
+
+global:
+  project: Project
+  collection: Collection
+
+# ============================================
+# =============== Components =================
+# ============================================
+
+xui-rail:
+  tabs:
+    logout: Logout
+    users: Users
+    search: Search
+    notifications: Notifications
+    settings: Settings
+    project: Project
+    history: History
+    info: Info
+
+xui-rail/project:
+  select-project: Select Project
+  back: Back
+  tools:
+    title: Tools
+    dashboard: Dashboard
+    task-manager: Task Manager
+    approvals: Approvals
+  directory:
+    title: Directory
+    no-content: Looks like this Project doesn't have any content yet!
+    back: Back
+  personal-collections:
+    title: Personal Collections
+    no-content: Looks like you don't have any collections yet!
+  group-collections:
+    title: Group Collections
+    no-content: Looks like you don't have any shared collections yet!
+  options:
+    share: Share
+    archive: Archive
+    delete: Delete
+    rename: Rename
+    upload: Upload
+    download: Download
+    move-to: Move To...
+    create-approval: Create Approval
+    new-personal-collection: New Personal Collection
+
+xui-rail/project-selector:
+  no-content: Your filter did not match any Projects.
+
+xui-top-app-bar:
+  file: File
+  view: View
+  help: Help
+  edit: Edit
+  grid-view: Grid View
+  list-view: List View
+  fullscreen: Fullscreen
+  filter: Filter
+  history: History
+  info: Info
+  new-folder: New Folder
+  new-collection: New Collection
+  upload: Upload
+  copy: Copy
+  help-center: Help Center
+  contact-support: Contact Support
+  keyboard-shortcuts: Keyboard Shortcuts
+
+xui-container-list:
+  created-by: Created By
+  date-created: Date Created
+  name: Name
+  type: Type
+  total: Total
+
+xui-container-grid:
+  assets: Assets
+  collections: Collections
+  folders: Folders
+
+# ============================================
+# ================= Routes ===================
+# ============================================
+
+login:
+  title: Login
+  message: Enter a username and password below and either sign in to an existing account or sign up
+  username: Username
+  password: Password
+  action: Sign In
+
+main:
+  title: Welcome to your dashboard!
+
+main/settings:
+  title: Settings
+
+main/projects/task-manager:
+  title: Task Manager for {name}
+
+main/projects/budget:
+  title: Project Budget Dashboard for {name}
+
+main/projects/show:
+  dashboard: Dashboard

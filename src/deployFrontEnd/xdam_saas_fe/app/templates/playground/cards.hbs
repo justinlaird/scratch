@@ -1,0 +1,66 @@
+{{! template-lint-disable no-bare-strings }}
+
+<div class="content-wrapper cards">
+  {{#each model as |item|}}
+    {{#xui-card}}
+
+    {{!--
+        For media square:
+
+        <div style={{item.style}} class="mdc-card__media mdc-card__media--square">
+          <div class="mdc-card__media-content">{{image.title}}</div>
+        </div>
+
+    --}}
+
+      {{!-- For meida 16:9 (NOTE: you can also use the sass mixin to define the aspect ratio) --}}
+      <div style={{background-image (img-src item size="medium")}} class="mdc-card__media mdc-card__media--16-9">
+        <div class="xui-card__title mdc-card__media-content">{{item.name}}</div>
+      </div>
+
+      {{!--
+          Define a div for the card actions. Actions can be buttons or icons,
+          each live in their own div. The actions and buttons container divs will
+          be adjacent to eachother.
+
+          Note: the number of actions (icons or buttons) defines the width of the
+          card, or you can define the width in scss for xui-card.mdc-card
+      --}}
+      <div class="mdc-card__actions">
+        <div class="mdc-card__action-buttons">
+          <button class="mdc-button mdc-card__action mdc-card__action--button">Action</button>
+        </div>
+
+        <div class="mdc-card__action-icons">
+          <button class="mdc-icon-button material-icons mdc-card__action mdc-card__action--icon"
+             aria-pressed="false"
+             aria-label="Add to favorites"
+             title="Add to favorites"
+             data-toggle-on-content="favorite"
+             data-toggle-on-label="Remove from favorites"
+             data-toggle-off-content="favorite_border"
+             data-toggle-off-label="Add to favorites">{{xui-icon "favorite-false"}}</button>
+          <button class="mdc-icon-button material-icons mdc-card__action mdc-card__action--icon"
+            title="Share">{{xui-icon "share-variant"}}</button>
+          <button class="mdc-icon-button material-icons mdc-card__action mdc-card__action--icon"
+            title="More options">{{xui-icon "dots-vertical"}}</button>
+        </div>
+      </div>
+
+      {{!--
+
+        OR for full bleed
+
+        <div class="mdc-card__actions">
+          <div class="mdc-card__actions mdc-card__actions--full-bleed">
+            <a class="mdc-button mdc-card__action mdc-card__action--button" href="#">
+              All Business Headlines
+              <i class="material-icons" aria-hidden="true">arrow_forward</i>
+            </a>
+          </div>
+        </div>
+
+       --}}
+    {{/xui-card}}
+  {{/each}}
+</div>

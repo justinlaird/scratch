@@ -1,0 +1,25 @@
+
+// Usage:
+// @include breakpoint(phone, up)
+// @include breakpoint(tablet, up)
+// @include breakpoint(desktop, down)
+
+@mixin breakpoint($point, $direction: up, $breakpoints: $xui-breakpoints) {
+  // If $mq-breakpoint is a key that exists in
+  // $mq-breakpoints, get and use the value
+  @if map-has-key($breakpoints, $point) {
+    $point: map-get($breakpoints, $point);
+  }
+
+  @if $direction == down {
+    @media screen and (max-width: #{$point}) {
+      @content;
+    }
+  }
+
+  @else if $direction == up {
+    @media screen and (min-width: #{$point}) {
+      @content;
+    }
+  }
+}

@@ -1,0 +1,10 @@
+{{yield (hash
+  openMenu=(action "openMenu")
+  trigger=(component "xui-menu/trigger" openMenu=(action "openMenu") eventType=eventType)
+  anchor=(component
+    "xui-menu/anchor"
+    closeMenu=(action "closeMenu")
+    eventType=eventType
+    initialized=initialized
+  )
+)}}

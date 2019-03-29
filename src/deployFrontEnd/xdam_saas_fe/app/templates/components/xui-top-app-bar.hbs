@@ -1,0 +1,13 @@
+<div class="mdc-top-app-bar__row">
+  {{yield (hash
+    left=(component "xui-top-app-bar-left")
+    right=(component "xui-top-app-bar-right")
+    menu=(component "menu/xui-menu")
+    button=(component "xui-button" variantType="blank")
+  )}}
+</div>
+
+{{!--
+we once curried, and handled the action in ember instead of layout-manager...
+    button=(component (component 'xui-button' isIcon=true isTopAppBarAction=true))
+ --}}

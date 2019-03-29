@@ -1,0 +1,61 @@
+{{#xui-app as |actions media config|}}
+  {{xui-rail tabs=config.leftRailTabs}}
+  {{#xui-content}}
+    {{#xui-top-app-bar as |appBar|}}
+      {{#unless media.isMobile}}
+        {{#appBar.left}}
+          {{#appBar.button
+            class=(if (not leftRail) "xui-rotate-180")
+            onClick=(action actions.toggleLeftRail)}}
+            {{svg-jar "double-chevron-left"}}
+          {{/appBar.button}}
+          <div class="xui-margin-half xui-black-lighten-4-color">|</div>
+          {{#each-in config.menus as |key value|}}
+            {{#xui-menu/wrapper as |menu|}}
+              {{#menu.trigger}}
+                {{#appBar.button}}{{value.name}}{{/appBar.button}}
+              {{/menu.trigger}}
+              {{#menu.anchor as |items|}}
+                {{#each value.items as |item|}}
+                  {{items.item icon=item.icon text=item.text keyboard=item.keyboard action=item.action}}
+                {{/each}}
+              {{/menu.anchor}}
+            {{/xui-menu/wrapper}}
+          {{/each-in}}
+          {{else}}
+        {{/appBar.left}}
+      {{/unless}}
+      {{#appBar.right}}
+        {{#unless media.isMobile}}
+          {{#appBar.button title=(t "xui-top-app-bar.filter")}}
+            {{svg-jar "filter"}}
+          {{/appBar.button}}
+          <div class="xui-margin-half xui-black-lighten-4-color">|</div>
+          {{#appBar.button selected=activeContainer.isListView title=(t "xui-top-app-bar.list-view") onClick=(action actions.toggleListView)}}
+            {{svg-jar "list-view"}}
+          {{/appBar.button}}
+          {{#appBar.button selected=activeContainer.isGridView title=(t "xui-top-app-bar.grid-view") onClick=(action actions.toggleGridView)}}
+            {{svg-jar "grid-view"}}
+          {{/appBar.button}}
+          <div class="xui-margin-half xui-black-lighten-4-color">|</div>
+          {{#appBar.button onClick=(action actions.toggleFullScreen) title=(t "xui-top-app-bar.fullscreen")}}
+            {{svg-jar "fullscreen"}}
+          {{/appBar.button}}
+          <div class="xui-margin-half xui-black-lighten-4-color">|</div>
+          {{#appBar.button
+            class=(if (not rightRail) "xui-rotate-180")
+            onClick=(action actions.toggleRightRail)}}
+            {{svg-jar "double-chevron-right"}}
+          {{/appBar.button}}
+        {{/unless}}
+      {{/appBar.right}}
+    {{/xui-top-app-bar}}
+    {{#xui-main}}
+      {{outlet}}
+    {{/xui-main}}
+  {{/xui-content}}
+  {{#unless media.isTablet}}
+    {{xui-rail tabs=config.rightRailTabs direction="right"}}
+  {{/unless}}
+  {{xui-dialog-new-resource}}
+{{/xui-app}}

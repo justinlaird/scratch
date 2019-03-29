@@ -1,0 +1,37 @@
+.xui-button {
+  cursor: pointer;
+
+  &.xui-button-blank {
+    border: none;
+    background: inherit;
+    color: inherit;
+    font-size: $xui-global-font-size;
+    font-family: $xui-font-family;
+
+    &.selected {
+      color: map-get($xui-colors, primary);
+
+      svg {
+        fill: map-get($xui-colors, primary);
+      }
+    }
+
+    &:focus {
+      outline: none;
+    }
+
+    &:active {
+      color: map-get($xui-colors, primary);
+    }
+
+    &:hover {
+      @include breakpoint(desktop, up) {
+        color: map-get($xui-colors, primary);
+
+        svg {
+          fill: map-get($xui-colors, primary);
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,271 @@
+<div class="xui-rail-top-item">
+  {{#xui-button
+    variantType="blank"
+    class="xui-padding-none xui-display-flex xui-width-100 xui-justify-center"
+    onClick=(action railActions.nextPanel "xui-rail/project-selector")
+    title=(t "xui-rail/project.select-project")}}
+    {{#if activeProject.lastSuccessful.value}}
+        <span class="xui-text-truncate xui-display-inline-block">{{activeProject.lastSuccessful.value.name}}</span>
+        <span class="xui-display-inline-block">{{svg-jar "menu-down"}}</span>
+      {{else if (and (gt activeProject.performCount 0) (not activeProject.isRunning))}}
+        <span>{{t "xui-rail/project.selectProject"}}</span>
+        {{svg-jar "menu-down"}}
+    {{/if}}
+  {{/xui-button}}
+</div>
+
+{{#xui-rail/project/wrapper registerSection=(action "registerSection") toggleSection=(action "toggleSection") as |projectWrapper|}}
+  {{#projectWrapper.section as |section|}}
+    {{#projectWrapper.listTitle sectionSymbol=section.symbol}}
+      <span class="mdc-list-item__graphic">
+        {{svg-jar "menu-right" class=(if section.isOpen "xui-icon xui-icon-open" "xui-icon")}}
+      </span>
+      <span class="mdc-list-item__text">{{t "xui-rail/project.tools.title"}}</span>
+    {{/projectWrapper.listTitle}}
+    {{#if section.isOpen}}
+      {{#projectWrapper.list}}
+        {{#projectWrapper.item}}
+          <span class="mdc-list-item__graphic">{{svg-jar "dashboard"}}</span>
+          <span class="mdc-list-item__text">
+            {{link-to "Dashboard" "main.projects.show" activeProject.lastSuccessful.value.id}}
+          </span>
+        {{/projectWrapper.item}}
+        {{#projectWrapper.item}}
+          <span class="mdc-list-item__graphic">{{svg-jar "budget"}}</span>
+          <span class="mdc-list-item__text">
+            {{link-to "Budget" "main.projects.budget" activeProject.lastSuccessful.value.id}}
+          </span>
+        {{/projectWrapper.item}}
+        {{#projectWrapper.item}}
+          <span class="mdc-list-item__graphic">{{svg-jar "task-manager"}}</span>
+          <span class="mdc-list-item__text">
+            {{link-to "Task Manager" "main.projects.task-manager" activeProject.lastSuccessful.value.id}}
+          </span>
+        {{/projectWrapper.item}}
+        {{#projectWrapper.item}}
+          <span class="mdc-list-item__graphic">{{svg-jar "approval"}}</span>
+          <span class="mdc-list-item__text">
+            {{link-to "Approvals" "main.projects.show" activeProject.lastSuccessful.value.id}}
+          </span>
+        {{/projectWrapper.item}}
+      {{/projectWrapper.list}}
+    {{/if}}
+  {{/projectWrapper.section}}
+
+  {{#projectWrapper.section isOpen=true as |section|}}
+    {{#projectWrapper.listTitle sectionSymbol=section.symbol}}
+      <span class="mdc-list-item__graphic">
+        {{svg-jar "menu-right" class=(if section.isOpen "xui-icon xui-icon-open" "xui-icon")}}
+      </span>
+      <span class="mdc-list-item__text">{{t "xui-rail/project.directory.title"}}</span>
+      <span class="mdc-list-item__meta">
+        {{#xui-menu/wrapper as |menu|}}
+          {{#menu.trigger}}
+            {{svg-jar "dots-horizontal"}}
+          {{/menu.trigger}}
+          {{#menu.anchor as |items|}}
+            {{items.item
+              icon="folder"
+              text="New Folder"
+              action=(action
+                "toggleOverlay"
+                "xui-dialog-new-resource"
+                (hash parentId=activeProject.lastSuccessful.value.rootFolder.id parentType="folder" recordType="folder")
+                target=overlayManager
+              )}}
+            {{items.item
+              icon="collection"
+              text="New Collection"
+              action=(action
+                "toggleOverlay"
+                "xui-dialog-new-resource"
+                (hash parentId=activeProject.lastSuccessful.value.rootFolder.id parentType="folder" recordType="collection")
+                target=overlayManager
+              )}}
+            {{items.divider}}
+            {{#items.item icon="asset-viewer"}}
+              {{link-to "Show in viewer" "main.folders.show" activeProject.lastSuccessful.value.rootFolder.id}}
+            {{/items.item}}
+            {{items.divider}}
+            {{items.item icon="filter" text="Filter by name..."}}
+            {{items.item icon="filter" text="Filter by author..."}}
+          {{/menu.anchor}}
+        {{/xui-menu/wrapper}}
+      </span>
+    {{/projectWrapper.listTitle}}
+    {{#if section.isOpen}}
+      {{#projectWrapper.list}}
+        {{#if directory.lastSuccessful.value.folder}}
+        <div class="mdc-list-item xui-rail-list-item">
+          {{#xui-button
+            variantType="blank"
+            onClick=(action "drillBack" item)
+            class="xui-display-flex xui-flex-grow xui-padding-none"}}
+            <span class="mdc-list-item__graphic">{{svg-jar "arrow-left"}}</span>
+            <span class="mdc-list-item__text">{{t "xui-rail/project.back"}}</span>
+          {{/xui-button}}
+        </div>
+        {{/if}}
+        {{#each (union directory.lastSuccessful.value.folders directory.lastSuccessful.value.collections) as |itemModel|}}
+          {{#projectWrapper.item model=itemModel as |item|}}
+            <span class="mdc-list-item__graphic">
+              {{#if item.hasSubItems}}
+                  {{#xui-button variantType="blank" onClick=(action item.toggle)}}
+                    {{svg-jar "menu-right" class=(if itemModel.isOpenInRail "xui-icon xui-icon-open" "xui-icon")}}
+                  {{/xui-button}}
+                {{else}}
+                  {{svg-jar itemModel.constructor.modelName}}
+              {{/if}}
+            </span>
+            <span class="mdc-list-item__text" {{action item.toggle true}} {{! template-lint-disable no-invalid-interactive }}>
+              {{link-to itemModel.name (concat "main." itemModel.constructor.modelName "s.show") itemModel.id}}
+            </span>
+            <span class="mdc-list-item__meta">
+              {{#xui-menu/wrapper as |menu|}}
+                {{#menu.trigger}}
+                  {{svg-jar "dots-horizontal"}}
+                {{/menu.trigger}}
+                {{#menu.anchor as |items|}}
+                  {{#each item.menuItems as |menuItem|}}
+                    {{#if (is-equal menuItem.type "divider")}}
+                        {{items.divider}}
+                      {{else}}
+                        {{items.item icon=menuItem.icon text=menuItem.text action=menuItem.action}}
+                    {{/if}}
+                  {{/each}}
+                {{/menu.anchor}}
+              {{/xui-menu/wrapper}}
+            </span>
+          {{/projectWrapper.item}}
+          {{#if itemModel.isOpenInRail}}
+            {{#each (union itemModel.folders itemModel.collections) as |subItemModel|}}
+              {{#projectWrapper.item model=subItemModel class="xui-rail-project-subitem" as |subItem|}}
+                <span class="mdc-list-item__graphic" {{action "drillInto" itemModel subItemModel}} {{! template-lint-disable no-invalid-interactive }}>
+                  {{#if subItem.hasSubItems}}
+                      {{#xui-button variantType="blank"}}
+                        {{svg-jar "menu-right"}}
+                      {{/xui-button}}
+                    {{else}}
+                      {{svg-jar subItemModel.constructor.modelName}}
+                  {{/if}}
+                </span>
+                <span class="mdc-list-item__text" {{action "drillInto" itemModel subItemModel}} {{! template-lint-disable no-invalid-interactive }}>
+                  {{#link-to (concat "main." subItemModel.constructor.modelName "s.show") subItemModel.id}}
+                    {{subItemModel.name}}
+                  {{/link-to}}
+                </span>
+                <span class="mdc-list-item__meta">
+                  {{#xui-menu/wrapper as |menu|}}
+                    {{#menu.trigger}}
+                      {{svg-jar "dots-horizontal"}}
+                    {{/menu.trigger}}
+                    {{#menu.anchor as |items|}}
+                      {{#each subItem.menuItems as |menuItem|}}
+                        {{#if (is-equal menuItem.type "divider")}}
+                            {{items.divider}}
+                          {{else}}
+                            {{items.item icon=menuItem.icon text=menuItem.text action=menuItem.action}}
+                        {{/if}}
+                      {{/each}}
+                    {{/menu.anchor}}
+                  {{/xui-menu/wrapper}}
+                </span>
+              {{/projectWrapper.item}}
+            {{/each}}
+          {{/if}}
+          {{!-- TODO: This condition has no effect - empty content message will never be shown --}}
+          {{else if (gt directory.performCount 0)}}
+          <div class="xui-padding-one xui-text-center">
+            <span class="xui-white-darken-1-color">{{t "xui-rail/project.dashboard.no-content"}}</span>
+          </div>
+        {{/each}}
+      {{/projectWrapper.list}}
+    {{/if}}
+  {{/projectWrapper.section}}
+
+  {{#projectWrapper.section as |section|}}
+    {{#projectWrapper.listTitle sectionSymbol=section.symbol}}
+      <span class="mdc-list-item__graphic">
+        {{svg-jar "menu-right" class=(if section.isOpen "xui-icon xui-icon-open" "xui-icon")}}
+      </span>
+      <span class="mdc-list-item__text">{{t "xui-rail/project.personal-collections.title"}}</span>
+      <span class="mdc-list-item__meta">
+        {{#xui-menu/wrapper as |menu|}}
+          {{#menu.trigger}}
+            {{svg-jar "dots-horizontal"}}
+          {{/menu.trigger}}
+          {{#menu.anchor as |items|}}
+            {{items.item
+              icon="collection"
+              text="New Personal Collection"
+              action=(action
+                "toggleOverlay"
+                "xui-dialog-new-resource"
+                (hash parentId=currentUser.id parentType="user" recordType="collection")
+                target=overlayManager
+              )}}
+          {{/menu.anchor}}
+        {{/xui-menu/wrapper}}
+      </span>
+    {{/projectWrapper.listTitle}}
+    {{#if section.isOpen}}
+      {{#projectWrapper.list}}
+        {{#each currentUser.collections as |itemModel|}}
+          {{#projectWrapper.item model=itemModel as |item|}}
+            <span class="mdc-list-item__graphic">{{svg-jar "collection"}}</span>
+            <span class="mdc-list-item__text">{{link-to itemModel.name "main.collections.show" itemModel.id}}</span>
+            <span class="mdc-list-item__meta">
+              {{#xui-menu/wrapper as |menu|}}
+                {{#menu.trigger}}
+                  {{svg-jar "dots-horizontal"}}
+                {{/menu.trigger}}
+                {{#menu.anchor as |items|}}
+                  {{#each item.menuItems as |menuItem|}}
+                    {{#if (is-equal menuItem.type "divider")}}
+                        {{items.divider}}
+                      {{else}}
+                        {{items.item icon=menuItem.icon text=menuItem.text action=menuItem.action}}
+                    {{/if}}
+                  {{/each}}
+                {{/menu.anchor}}
+              {{/xui-menu/wrapper}}
+            </span>
+          {{/projectWrapper.item}}
+          {{else}}
+          <div class="xui-padding-one xui-text-center">
+            <span class="xui-white-darken-1-color">{{t "xui-rail/project.personal-collections.no-content"}}</span>
+          </div>
+        {{/each}}
+      {{/projectWrapper.list}}
+    {{/if}}
+  {{/projectWrapper.section}}
+
+  {{#projectWrapper.section as |section|}}
+    {{#projectWrapper.listTitle sectionSymbol=section.symbol}}
+      <span class="mdc-list-item__graphic">
+        {{svg-jar "menu-right" class=(if section.isOpen "xui-icon xui-icon-open" "xui-icon")}}
+      </span>
+      <span class="mdc-list-item__text">{{t "xui-rail/project.group-collections.title"}}</span>
+    {{/projectWrapper.listTitle}}
+    {{#if section.isOpen}}
+      {{#projectWrapper.list}}
+        {{#each currentUser.groups as |group|}}
+          {{#each group.collections as |itemModel|}}
+            {{#projectWrapper.item model=itemModel}}
+              <span class="mdc-list-item__graphic">{{svg-jar "collection"}}</span>
+              <span class="mdc-list-item__text">{{link-to itemModel.name "main.collections.show" itemModel.id}}</span>
+              <span class="mdc-list-item__meta">
+                {{svg-jar "dots-horizontal"}}
+              </span>
+            {{/projectWrapper.item}}
+          {{/each}}
+          {{else}}
+          <div class="xui-padding-one xui-text-center">
+            <span class="xui-white-darken-1-color">{{t "xui-rail/project.group-collections.no-content"}}</span>
+          </div>
+        {{/each}}
+      {{/projectWrapper.list}}
+    {{/if}}
+  {{/projectWrapper.section}}
+
+{{/xui-rail/project/wrapper}}

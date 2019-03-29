@@ -1,0 +1,11 @@
+{{yield
+  (hash
+    toggleFullScreen=(action "toggleFullScreen" target=appShell)
+    toggleLeftRail=(action "toggleRail" "leftRail" target=layoutManager)
+    toggleListView=(action "setViewType" "list" target=activeContainer)
+    toggleGridView=(action "setViewType" "grid" target=activeContainer )
+    toggleRightRail=(action "toggleRail" "rightRail" target=layoutManager)
+  )
+  media
+  appShell.config
+}}

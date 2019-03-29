@@ -1,0 +1,13 @@
+.xui-content {
+  height: 100%;
+  overflow: hidden;
+  flex: auto;
+
+  @include breakpoint(desktop down) {
+    padding-bottom: $xui-rail-mobile-height;
+  }
+}
+
+.mdc-drawer-app-content {
+  transform: translateZ(0); // for edge and safari
+}

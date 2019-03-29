@@ -1,0 +1,54 @@
+.login {
+  width: 100vw;
+
+  @include dark-background();
+}
+
+.login-panel button {
+  margin-top: 16px;
+  width: 100%;
+}
+
+.login-panel .mdc-text-field {
+  width: 100%;
+}
+
+.login-panel p {
+  width: 90%;
+}
+
+.login-panel {
+  grid-column-end: span 4;
+  min-height: 340px;
+  height: auto;
+  background-color: map-get($xui-colors, black-lighten-2);
+  padding: 16px;
+  box-shadow: #f0f0f0;
+
+  ul {
+    height: 24px;
+  }
+}
+
+@media (min-width: mdc-layout-grid-breakpoint-min(desktop)) {
+  .login-panel {
+    grid-column-start: 5;    //3 for tablet 1 for mobile
+  }
+}
+
+@media (max-width: mdc-layout-grid-breakpoint-max(tablet)) {
+  .login-panel {
+    grid-column-start: 3;
+  }
+}
+
+@media (max-width: mdc-layout-grid-breakpoint-max(phone)) {
+  .login-panel {
+    grid-column-start: 1;
+  }
+}
+
+.login-content {
+  height: 90vh;
+  width: 90vw;
+}

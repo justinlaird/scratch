@@ -1,0 +1,42 @@
+.FreestyleNotes {
+  pre {
+    margin-top: 0;
+
+    &.hljs {
+      padding: 0.5rem 1rem;
+    }
+  }
+
+  &-content {
+    color: map-get($xui-colors, white-darken-1);
+
+    ul {
+      margin: 0;
+    }
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    padding: 0 1rem;
+    color: map-get($xui-colors, white-darken-1);
+    margin: $FreestyleGuide-spacing 0 ($xui-global-spacing / 2) 0;
+  }
+
+  p {
+    padding: 0 1rem;
+    color: map-get($xui-colors, white-darken-1);
+    margin: 0 0 ($xui-global-spacing / 2) 0;
+  }
+
+  // Appropriating h6 as snippet title
+  h6 {
+    font-size: $xui-global-font-size;
+    font-weight: bold;
+    margin: 0;
+    padding: 0.5rem 1rem 0.2rem;
+  }
+}

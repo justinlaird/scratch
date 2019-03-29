@@ -1,0 +1,6 @@
+// copy addon styles from ember-file-upload (we do not download addon css by
+// default as css file block page render in most browsers)
+// https://github.com/tim-evans/ember-file-upload/blob/002677db0bac6a25ae409e97a3e0834939fc5a7f/addon/styles/addon.css#L1-L3
+.file-upload input[hidden] {
+  display: none !important;
+}

@@ -1,0 +1,35 @@
+{{! template-lint-disable no-bare-strings }}
+
+<div class="content-wrapper index">
+  {{#each model as |item|}}
+    {{#xui-card onclick=(transition-to item.to)}}
+      <span class="xui-card__title mdc-typography--headline4">
+        {{item.name}}
+      </span>
+
+      <div class="mdc-card__actions">
+        <div class="mdc-card__action-buttons">
+          <button onclick={{transition-to item.to}}
+                  class="mdc-button mdc-card__action mdc-card__action--button">View</button>
+        </div>
+      </div>
+
+      {{!--
+
+        OR for full bleed
+
+        <div class="mdc-card__actions">
+          <div class="mdc-card__actions mdc-card__actions--full-bleed">
+            <a class="mdc-button mdc-card__action mdc-card__action--button" href="#">
+              All Business Headlines
+              <i class="material-icons" aria-hidden="true">arrow_forward</i>
+            </a>
+          </div>
+        </div>
+
+       --}}
+    {{/xui-card}}
+  {{/each}}
+</div>
+
+

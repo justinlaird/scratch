@@ -1,0 +1,30 @@
+<div class="xui-rail-tabs-wrapper">
+  {{#each (array primaryTabs secondaryTabs) as |tabs index|}}
+    <div class="xui-rail-tabs-{{if (is-equal index 0) "primary" "secondary"}}">
+      {{#each tabs as |tab|}}
+        {{#xui-button
+          variantType="blank"
+          class=(if (is-equal activeTabSlug tab.slug) "xui-rail-tab-active xui-rail-tab" "xui-rail-tab")
+          onClick=(action "handleTabClick" tab)
+          data-test-xui-rail-tab=tab.slug
+          title=tab.name}}
+          {{svg-jar tab.icon}}
+          <div class="xui-rail-tab-text xui-hide-for-desktop">{{tab.name}}</div>
+        {{/xui-button}}
+      {{/each}}
+    </div>
+  {{/each}}
+</div>
+
+<div class="xui-rail-content-wrapper" data-test-xui-rail-content>
+  {{component activePanel
+    railActions=(hash
+      nextPanel=(action "nextPanel")
+      lastPanel=(action "lastPanel")
+    )
+    data-test-xui-panel=activeTabSlug
+  }}
+</div>
+
+<div {{action "toggleRail"}} {{! template-lint-disable no-invalid-interactive }}
+     class="xui-rail-divider-column"></div>

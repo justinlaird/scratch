@@ -1,0 +1,37 @@
+<div class="xui-rail-top-item">
+  {{#xui-button
+    variantType="blank"
+    onClick=(action railActions.lastPanel)
+    class="xui-display-flex xui-flex-grow xui-padding-none"}}
+    <span class="mdc-list-item__graphic">{{svg-jar "arrow-left"}}</span>
+  {{/xui-button}}
+</div>
+
+<div class="xui-rail-project-selector-search">
+  {{xui-field
+    value=projectNameFilter
+    placeholder="Filter..."
+    icon="search"
+    type="search"
+    handleKeyDown=(action "handleKeyDown")}}
+</div>
+
+<ul class="mdc-list xui-rail-project-selector-list">
+  {{#each fetchProjects.lastSuccessful.value as |project|}}
+    <li {{action "selectProject" project.id}} {{! template-lint-disable no-invalid-interactive }}
+        class="focusable mdc-list-item xui-rail-list-item {{if (is-equal activeProject.lastSuccessful.value.id project.id) "xui-primary-color"}}"
+        data-select-project={{project.id}}
+        tabindex="0">
+      <span class="mdc-list-item__text xui-flex-grow">
+        {{project.name}}
+      </span>
+      <span class="mdc-list-item__meta xui-flex-auto">
+        {{concat "@" project.customer.name}}
+      </span>
+    </li>
+    {{else if (and (gt fetchProjects.performCount 0) (not fetchProjects.isRunning))}}
+    <li class="mdc-list-item xui-rail-list-item">
+      <div class="xui-padding-one xui-text-center">{{t "xui-rail/project-selector.no-content"}}</div>
+    </li>
+  {{/each}}
+</ul>

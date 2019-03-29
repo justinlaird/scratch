@@ -1,0 +1,323 @@
+
+{{!--
+  USE THE SNIPPET BELOW WITHIN A `freestyle-section` COMPONENT AS BOILERPLATE WHEN ADDING NEW
+  COMPONENTS TO THE STYLE GUIDE:
+
+  {{#section.subsection name="Name Of Component"}}
+    {{#freestyle-usage "my-component-slug" title="Example"}}
+      <p>Add your component here</p>
+    {{/freestyle-usage}}
+    {{#freestyle-note "my-component-slug--notes"}}
+    Describe the component & its use cases
+    ### Args
+    * `title (string)`: Describe the argument
+    {{/freestyle-note}}
+  {{/section.subsection}}
+
+  ALSO, PLEASE NOTE:
+  - Do not modify the `freestyle-usage.title` value
+  - `my-component-slug` should be unique among freestyle-usage components
+  - freestyle-note slug must append `--notes`
+  - For components with multiple states, use freestyle-collection component (see freestyle docs)
+  - Do not add single-purpose components to this guide. The components in the style guide should be
+  consumable throughout the app.
+--}}
+
+{{! template-lint-disable no-bare-strings }}
+
+{{#freestyle-guide title="Clique Style Guide"}}
+
+  {{#freestyle-section name="Visual Style" as |section|}}
+    {{#section.subsection name="Typography"}}
+      {{#freestyle-usage "typography-headings" title="Example"}}
+        <h1 class="mdc-typography--headline1">Heading Level 1</h1>
+        <h2 class="mdc-typography--headline2">Heading Level 2</h2>
+        <h3 class="mdc-typography--headline3">Heading Level 3</h3>
+        <h4 class="mdc-typography--headline4">Heading Level 4</h4>
+        <h5 class="mdc-typography--headline5">Heading Level 5</h5>
+        <h6 class="mdc-typography--headline6">Heading Level 6</h6>
+        <p class="mdc-typography--body1">Body 1. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quos blanditiis tenetur unde suscipit, quam beatae rerum inventore consectetur, neque doloribus, cupiditate numquam dignissimos laborum fugiat deleniti?</p>
+        <p class="mdc-typography--body2">Body 2. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quos blanditiis tenetur unde suscipit, quam beatae rerum inventore consectetur, neque doloribus, cupiditate numquam dignissimos laborum fugiat deleniti?</p>
+        <div class="mdc-typography--button">Button Text</div>
+        <div class="mdc-typography--caption">Caption Text</div>
+        <div class="mdc-typography--overline">Overline Text</div>
+      {{/freestyle-usage}}
+    {{/section.subsection}}
+    {{#section.subsection name="Colors"}}
+      {{#freestyle-usage "xui-colors" title="Example"}}
+        {{freestyle-palette colorPalette=colorPalette title=""}}
+      {{/freestyle-usage}}
+    {{/section.subsection}}
+  {{/freestyle-section}}
+
+  {{#freestyle-section name="Structure" as |section|}}
+    {{#section.subsection name="Card"}}
+      {{#freestyle-usage "xui-card" title="Example"}}
+        <div class="xui-display-flex xui-black-lighten-1-bg xui-padding-two xui-align-flex-start">
+          {{#xui-card draggable=true
+            square=true
+            width="25%"
+            heightRatio=1
+            selected=true}}
+            <div class="xui-card__before-img">
+              <span class="xui-card__text" contenteditable="true">Some Name</span>
+            </div>
+            <div class="xui-card__img" style={{background-image "//via.placeholder.com/250?text=img"}}></div>
+            <div class="xui-card__after-img">
+              <div>
+                {{svg-jar "thumb-up"}}
+              </div>
+              <div>
+                {{svg-jar "dots-horizontal"}}
+              </div>
+            </div>
+          {{/xui-card}}
+          {{#xui-card width="25%" square=false draggable=true}}
+            <div class="xui-card__text">
+              {{svg-jar "collection"}}
+              Some truncated collection name with a long name.
+            </div>
+          {{/xui-card}}
+        </div>
+      {{/freestyle-usage}}
+      {{#freestyle-note "xui-card--notes"}}
+      Cards are normally used within a grid view to showcase assets, folders, or collections.
+
+      Note: You'll most likely want to use cards in a flex container with some item alignment or content justification (see example).
+
+      ### Args
+      * `selected (boolean)`: Gives the card a selected state
+      * `draggable (boolean)`: Adds the draggable HTML5 attribute
+      * `width (string)`: A percentage value describing how much of the parents width the card should span.
+      * `square (boolean)`: Gives the card 1:1 dimensions.
+      * `heightRatio (number)`: Only applicable for when square=true. Allows for specifying custom height ratio (1:2).
+      {{/freestyle-note}}
+    {{/section.subsection}}
+    {{#section.subsection name="Empty Content"}}
+      {{#freestyle-usage "xui-empty-content" title="Example"}}
+        <p>Add your component here</p>
+      {{/freestyle-usage}}
+      {{#freestyle-note "xui-empty-content--notes"}}
+      Describe the component & its use cases
+      ### Args
+      * `title (string)`: Describe the argument
+      {{/freestyle-note}}
+    {{/section.subsection}}
+    {{#section.subsection name="Grid"}}
+      {{#freestyle-usage "xui-grid" title="Example"}}
+        <p>Add your component here</p>
+      {{/freestyle-usage}}
+      {{#freestyle-note "xui-grid--notes"}}
+      Describe the component & its use cases
+      ### Args
+      * `title (string)`: Describe the argument
+      {{/freestyle-note}}
+    {{/section.subsection}}
+  {{/freestyle-section}}
+
+  {{#freestyle-section name="Overlays" as |section|}}
+    {{#section.subsection name="Dialog"}}
+      {{#freestyle-usage "xui-dialog" title="Example"}}
+        {{#xui-button onClick=(action "toggleOverlay" "unique-dialog-slug" target=overlayManager)}}
+          Open Dialog
+        {{/xui-button}}
+        {{#xui-dialog title="Dialog title" buttons=(array (hash name="Confirm" default=true)) slug="unique-dialog-slug"}}
+          Some Dialog Content
+        {{/xui-dialog}}
+      {{/freestyle-usage}}
+      {{#freestyle-note "xui-dialog--notes"}}
+      Some Description Goes Here
+      ### Args
+      * `title (string)`: Dialog title text
+      * `buttons (Array)`: Buttons for dialog footer
+      * `open (!boolean)`: Set if the dialog is open
+      * `initialFocusSelector (?string)`: Selector to receive focus after opening
+      {{/freestyle-note}}
+    {{/section.subsection}}
+    {{#section.subsection name="Menu"}}
+      {{#freestyle-usage "menu-click" title="Example"}}
+        {{#xui-menu/wrapper as |menu|}}
+          {{#menu.trigger}}
+            {{svg-jar "dots-horizontal"}}
+          {{/menu.trigger}}
+          {{#menu.anchor as |items|}}
+            {{items.item icon="folder" text="Item 1"}}
+            {{items.divider}}
+            {{items.item text="Item 2"}}
+          {{/menu.anchor}}
+        {{/xui-menu/wrapper}}
+      {{/freestyle-usage}}
+      {{#freestyle-note "menu-click--notes"}}
+        A menu that can be opened via click, hover, or right click. Anything passed within {{menu.trigger}} will become the target for opening the menu. Note, menu yields the closure action "openMenu" in case you'd prefer to bring your own trigger.
+
+        ### Wrapper Args
+        * `eventType (string)`: Specify the type of trigger (click, mouseEnter, contextMenu)
+        * `anchor (string)`: See material surface menu docs for anchor types. Defaults to "BOTTOM_LEFT".
+        ### Item Args
+        * `text (string)`: Menu item text
+        * `icon (string)`: Menu item icon
+        * `disabled (boolean)`: Disables menu item (actions will not fire)
+        * `hidden (boolean)`: Hides the menu item
+        * `keyboard (string)`: Show the keyboard shortcut (if one exists)
+        * `action (ClosureAction)`: An action which is fired after clicking the menu.
+      {{/freestyle-note}}
+    {{/section.subsection}}
+    {{#section.subsection name="Tooltip"}}
+    {{/section.subsection}}
+  {{/freestyle-section}}
+
+  {{#freestyle-section name="Actions" as |section|}}
+    {{#section.subsection name="Button"}}
+      {{#freestyle-collection title="Button Variants" defaultKey="normal" inline=true as |collection|}}
+        {{#collection.variant key="normal"}}
+          {{#freestyle-usage "xui-button" title="Example"}}
+            {{#xui-button}}Normal Button{{/xui-button}}
+            {{#xui-button variantType="blank"}}Blank Button{{/xui-button}}
+            {{#xui-button variantType="raised"}}Raised Button{{/xui-button}}
+            {{#xui-button variantType="unelevated"}}Unelevated Button{{/xui-button}}
+            {{#xui-button variantType="outlined"}}Outlined Button{{/xui-button}}
+            {{#xui-button variantType="dense"}}Dense Button{{/xui-button}}
+            {{#xui-button variantType="stroked"}}Stroked Button{{/xui-button}}
+            {{#xui-button variantType="icon"}}
+              {{svg-jar "folder" class="mdc-button__icon"}}
+              Icon Button
+            {{/xui-button}}
+          {{/freestyle-usage}}
+          {{#freestyle-note "xui-button--notes"}}
+          Describe the component & its use cases
+          ### Args
+          * `onClick (ClosureAction)`: A closure action triggered onclick
+          * `variantType (string)`: Specify the type of button.
+          {{/freestyle-note}}
+        {{/collection.variant}}
+        {{#collection.variant key="icon"}}
+          {{#freestyle-usage "xui-button-icon" title="Example"}}
+            {{#xui-button variantType="icon"}}
+              {{svg-jar "folder"}} Button Sample
+            {{/xui-button}}
+          {{/freestyle-usage}}
+          {{#freestyle-note "mwc-ui-button-icon--notes"}}
+          Include an icon by using the variantType="icon"
+          {{/freestyle-note}}
+        {{/collection.variant}}
+        {{#collection.variant key="blank"}}
+          {{#freestyle-usage "xui-button-blank" title="Example"}}
+            {{#xui-button variantType="blank"}}
+              {{svg-jar "folder"}}
+            {{/xui-button}}
+          {{/freestyle-usage}}
+          {{#freestyle-note "xui-button-blank--notes"}}
+          Using the variantType="blank" will attempt to strip as much styling as possible to provide a clean slate. Used primarily in conjunction with a closure action.
+          {{/freestyle-note}}
+        {{/collection.variant}}
+      {{/freestyle-collection}}
+    {{/section.subsection}}
+    {{#section.subsection name="Button Group"}}
+    {{/section.subsection}}
+  {{/freestyle-section}}
+
+  {{#freestyle-section name="Images & Icons" as |section|}}
+    {{#section.subsection name="SVG Icons"}}
+      {{#freestyle-usage "svg-icons" title="Example"}}
+        {{svg-jar "folder"}}
+      {{/freestyle-usage}}
+      {{#freestyle-note "svg-icons--notes"}}
+        SVG Icons are implemented as a helper (not a component). View available icons [here](/ember-svg-jar/index.html)
+      {{/freestyle-note}}
+    {{/section.subsection}}
+    {{#section.subsection name="Avatar"}}
+    {{/section.subsection}}
+    {{#section.subsection name="Thumbnail"}}
+    {{/section.subsection}}
+    {{#section.subsection name="Badge"}}
+    {{/section.subsection}}
+    {{#section.subsection name="Chips"}}
+      {{#freestyle-usage "xui-chips" title="Example"}}
+        <div class="mdc-chip-set">
+          <div class="mdc-chip" tabindex="0">
+            <div class="mdc-chip__text">Chip content</div>
+          </div>
+          <div class="mdc-chip">
+            {{svg-jar "user" class="xui-icon mdc-chip__icon--leading"}}
+            <div class="mdc-chip__text">Add to calendar</div>
+          </div>
+          <div class="mdc-chip">
+            <div class="mdc-chip__text">Jane Smith</div>
+            {{svg-jar "user" class="xui-icon mdc-chip__icon--trailing"}}
+          </div>
+        </div>
+      {{/freestyle-usage}}
+      {{#freestyle-note "xui-chips--notes"}}
+      \* Needs to be refactored into component
+      {{/freestyle-note}}
+    {{/section.subsection}}
+  {{/freestyle-section}}
+
+  {{#freestyle-section name="Feedback Indicators" as |section|}}
+    {{#section.subsection name="Progress Bar"}}
+    {{/section.subsection}}
+    {{#section.subsection name="Banner"}}
+    {{/section.subsection}}
+    {{#section.subsection name="Toast"}}
+    {{/section.subsection}}
+  {{/freestyle-section}}
+
+  {{#freestyle-section name="Lists & Tables" as |section|}}
+    {{#section.subsection name="Data Table"}}
+    {{/section.subsection}}
+    {{#section.subsection name="List"}}
+    {{/section.subsection}}
+  {{/freestyle-section}}
+
+  {{#freestyle-section name="Forms" as |section|}}
+    {{#section.subsection name="Text Input"}}
+      {{#freestyle-usage "text-input" title="Example"}}
+        {{input name="text" type="text" placeholder="text"}}
+      {{/freestyle-usage}}
+    {{/section.subsection}}
+    {{#section.subsection name="Number Input"}}
+      {{#freestyle-usage "number-input" title="Example"}}
+        {{input name="number" type="number" placeholder="number"}}
+      {{/freestyle-usage}}
+    {{/section.subsection}}
+    {{#section.subsection name="Checkbox Input"}}
+      {{#freestyle-usage "checkbox-input" title="Example"}}
+        {{input name="checkbox" type="checkbox"}}
+      {{/freestyle-usage}}
+    {{/section.subsection}}
+    {{#section.subsection name="Color Input"}}
+      {{#freestyle-usage "color-input" title="Example"}}
+        {{input name="color" type="color"}}
+      {{/freestyle-usage}}
+    {{/section.subsection}}
+    {{#section.subsection name="Date Input"}}
+      {{#freestyle-usage "date-input" title="Example"}}
+        {{input name="date" type="date"}}
+      {{/freestyle-usage}}
+    {{/section.subsection}}
+    {{#section.subsection name="Date Time Input"}}
+      {{#freestyle-usage "date-time-input" title="Example"}}
+        {{input name="datetime" type="datetime" placeholder="datetime"}}
+      {{/freestyle-usage}}
+    {{/section.subsection}}
+    {{#section.subsection name="Email Input"}}
+      {{#freestyle-usage "email-input" title="Example"}}
+        {{input name="email" type="email" placeholder="email"}}
+      {{/freestyle-usage}}
+    {{/section.subsection}}
+  {{/freestyle-section}}
+
+  {{#freestyle-section name="Navigation" as |section|}}
+    {{#section.subsection name="Pagination"}}
+    {{/section.subsection}}
+    {{#section.subsection name="Tabs"}}
+    {{/section.subsection}}
+    {{#section.subsection name="Link"}}
+    {{/section.subsection}}
+    {{#section.subsection name="Footer Help"}}
+    {{/section.subsection}}
+  {{/freestyle-section}}
+
+{{/freestyle-guide}}
+
+{{! template-lint-enable no-bare-strings }}

@@ -1,0 +1,42 @@
+{{!-- WHOLE FILE DISABLE OKAY --}}
+{{! template-lint-disable no-bare-strings }}
+
+{{#if isFolder}}
+  <p id={{uploader.folderQueueId}} class="mdc-typography--headline6 xui-padding-top-one xui-padding-left-one xui-margin-none"></p>
+
+  {{#if (not @isSidebar)}}
+    {{#maybe-in-element uploader.globalQueueDestinationElement true}}
+      {{#with (file-queue) as |queue|}}
+        {{#if queue.files.length}}
+            Total Progress: {{queue.progress}}%
+        {{/if}}
+      {{/with}}
+    {{/maybe-in-element}}
+    <br>
+    {{#maybe-in-element uploader.folderQueueDestinationElement true}}
+      {{#with (file-queue name=@folderId) as |queue|}}
+        {{#if queue.files.length}}
+          Progress for {{queue.name}}: {{queue.progress}}%
+        {{/if}}
+      {{/with}}
+    {{/maybe-in-element}}
+  {{/if}}
+
+  {{#file-dropzone name=@folderId
+                   cursor="copy" as |dropzone queue|}}
+    {{#file-upload name=queue.name
+                   accept="image/*"
+                   multiple=true
+                   onfileadd=(action "uploadImage" @folderId target=uploader)}}
+    {{/file-upload}}
+
+    {{yield}}
+  {{/file-dropzone}}
+{{else}}
+  {{yield}}
+{{/if}}
+
+
+
+
+

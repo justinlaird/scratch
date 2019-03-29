@@ -1,0 +1,13 @@
+.FreestyleSubsection {
+  &.is-hidden {
+    display: none;
+  }
+
+  &-name {
+    font-size: 1.5rem;
+    padding: 0 $xui-global-spacing;
+    margin: $xui-global-spacing 0;
+    color: map-get($xui-colors, white);
+    font-weight: bold;
+  }
+}

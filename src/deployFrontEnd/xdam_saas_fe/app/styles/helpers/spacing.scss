@@ -1,0 +1,26 @@
+$xui-spacing-types: 'margin' 'padding';
+$xui-spacing-positions: 'top' 'bottom' 'left' 'right';
+// $xui-spacing-amounts: 0 1 2 3;
+
+$xui-spacing-amounts: (
+  none: 0,
+  quarter: 0.25,
+  half: 0.5,
+  one: 1,
+  two: 2,
+  three: 3
+);
+
+@each $type in $xui-spacing-types {
+  @each $name, $amount in $xui-spacing-amounts {
+    @each $position in $xui-spacing-positions {
+      .xui-#{$type}-#{$position}-#{$name} {
+        #{$type}-#{$position}: $xui-global-spacing * $amount !important;
+      }
+    }
+
+    .xui-#{$type}-#{$name} {
+      #{$type}: $xui-global-spacing * $amount !important;
+    }
+  }
+}

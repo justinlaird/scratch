@@ -1,0 +1,87 @@
+
+  {{#cp-panels as |panels|}}
+    {{#if model.folders}}
+      {{#panels.panel as |panel|}}
+        {{#panel.toggle}}
+          {{svg-jar "menu-right" class=(if panel.isOpen "xui-icon xui-rotate-90" "xui-icon")}}
+          <span class="xui-container-grid-accordion-title">{{t "xui-container-grid.folders"}}</span>
+        {{/panel.toggle}}
+        {{#panel.body}}
+          <div class="xui-container-grid">
+            {{#each model.folders as |folder|}}
+              {{#xui-card width=cardWidth draggable=true}}
+                <div class="xui-card__text">
+                  {{svg-jar "folder"}}
+                    {{link-to folder.name "main.folders.show" folder.routeModel.id class="xui-margin-left-quarter"}}
+                </div>
+              {{/xui-card}}
+            {{/each}}
+          </div>
+        {{/panel.body}}
+      {{/panels.panel}}
+    {{/if}}
+
+    {{#if model.collections}}
+      {{#panels.panel as |panel|}}
+        {{#panel.toggle}}
+          {{svg-jar "menu-right" class=(if panel.isOpen "xui-icon xui-rotate-90" "xui-icon")}}
+          <span class="xui-container-grid-accordion-title">{{t "xui-container-grid.collections"}}</span>
+        {{/panel.toggle}}
+        {{#panel.body}}
+          <div class="xui-container-grid">
+            {{#each model.collections as |collection|}}
+              {{#xui-card width=cardWidth draggable=true}}
+                <div class="xui-card__text">
+                  {{svg-jar "collection"}}
+                  {{link-to collection.name "main.collections.show" collection.routeModel.id class="xui-margin-left-quarter"}}
+                </div>
+              {{/xui-card}}
+            {{/each}}
+          </div>
+        {{/panel.body}}
+      {{/panels.panel}}
+    {{/if}}
+
+    {{#if model.children}}
+      {{#panels.panel open=true as |panel|}}
+        {{#panel.toggle}}
+          {{svg-jar "menu-right" class=(if panel.isOpen "xui-icon xui-rotate-90" "xui-icon")}}
+          <span class="xui-container-grid-accordion-title">{{t "xui-container-grid.assets"}}</span>
+        {{/panel.toggle}}
+        {{#panel.body}}
+          <div class="xui-container-grid">
+            {{#each (filter-by "hasUrl" true model.assets) as |item itemIndex|}}
+              {{#xui-card draggable=true
+                square=true
+                width=cardWidth
+                heightRatio=cardHeightRatio
+                selected=(if (is-equal itemIndex 0) true false)}}
+                <div class="xui-card__before-img">
+                  <span class="xui-card__text" contenteditable="true">{{item.name}}</span>
+                </div>
+                <div class="xui-card__img" style={{background-image (img-src item.model size="medium")}}></div>
+                <div class="xui-card__after-img">
+                  <div>
+                    {{svg-jar "thumb-down"}}
+                    {{svg-jar "thumb-up"}}
+                  </div>
+                  <div>
+                    {{svg-jar "star"}}
+                    {{svg-jar "star"}}
+                    {{svg-jar "star"}}
+                    {{svg-jar "star"}}
+                    {{svg-jar "star"}}
+                  </div>
+                  <div>
+                    {{svg-jar "dots-horizontal"}}
+                  </div>
+                </div>
+              {{/xui-card}}
+            {{/each}}
+          </div>
+        {{/panel.body}}
+      {{/panels.panel}}
+    {{/if}}
+  {{/cp-panels}}
+
+

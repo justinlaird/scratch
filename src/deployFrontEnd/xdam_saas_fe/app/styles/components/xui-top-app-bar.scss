@@ -1,0 +1,17 @@
+.xui-top-app-bar {
+  background-color: map-get($xui-colors, black-lighten-3);
+  color: $mdc-theme-on-surface;
+
+  .xui-button-blank {
+    padding: 0 10px;
+    height: $xui-top-app-bar-height;
+    line-height: $xui-top-app-bar-height;
+
+    @include mdc-typography(button);
+  }
+}
+
+.mdc-top-app-bar__action-item,
+.mdc-top-app-bar__navigation-icon {
+  will-change: unset !important;
+}

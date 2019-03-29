@@ -1,0 +1,42 @@
+<form>
+  {{yield (hash
+    field=(component "xui-field")
+    changeset=@changeset
+    save=@save
+    rollback=@rollback
+  )}}
+</form>
+
+<ul data-test-xui-form-errors>
+  {{#if @changeset.isInvalid}}
+    {{#each @changeset.errors as |errorsHash|}}
+      {{#each errorsHash.validation as |error|}}
+        <li>{{error}}</li>
+      {{/each}}
+    {{/each}}
+  {{/if}}
+</ul>
+
+
+{{!-- TODO: the abstract version will roughly be --}}
+{{!--
+
+  {{#xui-form as |form|}}
+    {{form.field data-test-xui-form-field-label-is-name
+                 label="Name"
+                 value=(mut form.changeset.name)}}
+
+    {{#form.footer as |footer|}}
+      {{footer.submit form.changeset}}
+      {{footer.rollback form.changeset}}
+    {{/form.footer}}
+
+    {{#form.errors as |errorsHash|}}
+      {{#each errorsHash.validation as |error|}}
+        <li>{{error}}</li>
+      {{/each}}
+    {{/form.errors}}
+  {{/xui-form}}
+
+ --}}
+

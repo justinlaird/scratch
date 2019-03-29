@@ -1,0 +1,16 @@
+{{! template-lint-disable no-bare-strings }}
+
+Rendering sample panel
+<br>
+<button {{action railActions.nextPanel "xui-rail/notification"}}>
+  Render alert
+</button>
+
+<ul class="mdc-list">
+  {{#each alerts as |alert|}}
+    <li class="mdc-list-item">
+      {{svg-jar alert.icon}}
+      {{alert.message}}
+    </li>
+  {{/each}}
+</ul>

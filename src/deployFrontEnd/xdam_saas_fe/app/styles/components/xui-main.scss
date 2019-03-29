@@ -1,0 +1,7 @@
+.xui-main {
+  height: 100%;
+  overflow-y: auto;
+
+  @include smooth-scroll();
+  @include dark-background();
+}

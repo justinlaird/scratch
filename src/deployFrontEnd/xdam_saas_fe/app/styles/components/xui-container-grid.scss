@@ -1,0 +1,24 @@
+$xui-card-gutter-half: $xui-card-gutter / 2;
+
+.xui-container-grid-wrapper {
+  padding: $xui-card-gutter-half;
+
+  .cp-Panel {
+    &-toggle {
+      display: flex;
+      align-items: center;
+      background-color: map-get($xui-colors, black-lighten-2);
+      padding: $xui-card-gutter;
+      border: $xui-card-gutter-half solid map-get($xui-colors, black-lighten-1);
+      color: map-get($xui-colors, white-darken-1);
+      font-weight: $xui-global-medium-font-weight;
+    }
+  }
+
+  .xui-container-grid {
+    display: flex;
+    flex-flow: row wrap;
+    box-sizing: border-box;
+    background-color: map-get($xui-colors, black-lighten-1);
+  }
+}

@@ -1,0 +1,9 @@
+<h4 class="mdc-typography--headline4 xui-padding-top-one xui-padding-left-one xui-margin-none">{{model.title}}</h4>
+
+{{#xui-file-dropzone model=model isFolder=(eq model.containerType "folder") folderId=model.containerId}}
+  {{#if activeContainer.isListView}}
+    {{xui-container-list model=model filterAction=(action "filterAction")}}
+  {{else}}
+    {{xui-container-grid model=model filterAction=(action "filterAction")}}
+  {{/if}}
+{{/xui-file-dropzone}}

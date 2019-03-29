@@ -1,0 +1,17 @@
+{{!-- Item icon --}}
+{{#if icon}}
+  <span class="mdc-list-item__graphic xui-margin-right-half xui-padding-none">{{svg-jar icon}}</span>
+{{/if}}
+
+{{#if text}}
+    {{text}}
+  {{else}}
+    {{yield}}
+{{/if}}
+
+{{!-- Item Keyboard Shortcut --}}
+{{#if media.isDesktop}}
+  {{#if keyboard}}
+    <strong class="mdc-list-item__meta xui-white-darken-2-color">{{keyboard}}</strong>
+  {{/if}}
+{{/if}}

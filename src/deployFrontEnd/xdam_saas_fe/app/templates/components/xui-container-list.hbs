@@ -1,0 +1,40 @@
+<ul class="xui-container-list-content">
+
+    <li class="xui-container-list-header">
+        <div class="xui-data-header-cell xui-data-header-cell-sort">{{t "xui-container-list.name"}}</div>
+        <div class="xui-data-header-cell xui-data-header-cell-sort">{{t "xui-container-list.total"}}</div>
+        <div class="xui-data-header-cell xui-data-header-cell-sort">{{t "xui-container-list.type"}}</div>
+        <div class="xui-data-header-cell xui-data-header-cell-sort">{{t "xui-container-list.created-by"}}</div>
+        <div class="xui-data-header-cell xui-data-header-cell-sort">{{t "xui-container-list.date-created"}}</div>
+    </li>
+    <li class="xui-container-list-header">
+        <div class="xui-data-header-cell">{{input data-key="name" key-up=@filterAction class="xui-input-field" type="search" placeholder="Search..." autocomplete="off"}}</div>
+        <div class="xui-data-header-cell"></div>
+        <div class="xui-data-header-cell"></div>
+        <div class="xui-data-header-cell"></div>
+        <div class="xui-data-header-cell">{{input data-key="created" key-up=@filterAction class="xui-input-field" type="search" placeholder="Search..." autocomplete="off"}}</div>
+    </li>
+  {{#each model.children as |row|}}
+    <li class="xui-container-list-row">
+        <div class="xui-container-list-cell">
+          {{#if row.model.hasUrl}}
+            <img class="xui-container-list-xsmall-thumb" src={{img-src row.model size="mini"}} alt={{row.model.name}}>
+          {{/if}}
+          {{#if row.hasRoute}}
+            {{#link-to row.route row.routeModel.id class="xui-container-list-link"}}{{row.name}}{{/link-to}}
+          {{else}}
+            {{row.name}}
+          {{/if}}
+        </div>
+        <div class="xui-container-list-cell">{{row.totalChildren}}</div>
+        <div class="xui-container-list-cell">{{row.type}}</div>
+        <div class="xui-container-list-cell">{{currentUser.fullName}}</div>
+        <div class="xui-container-list-cell">{{moment-format row.created "M/DD/YYYY" }}</div>
+    </li>
+  {{/each}}
+
+</ul>
+
+
+
+

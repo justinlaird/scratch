@@ -1,0 +1,30 @@
+// Usage
+// .xui-show-for-phone
+// .xui-show-for-tablet
+// .xui-show-for-desktop
+
+$xui-spacing-types: 'show';
+
+@each $type, $value in $xui-breakpoints {
+  .xui-hide-for-#{$type} {
+    @include breakpoint(#{$type}, up) {
+      display: none !important;
+    }
+  }
+
+  .xui-show-for-#{$type} {
+    display: none !important;
+
+    @include breakpoint(#{$type}, up) {
+      display: inherit !important;
+    }
+  }
+}
+
+.xui-hide {
+  display: none !important;
+}
+
+.xui-invisible {
+  visibility: hidden !important;
+}

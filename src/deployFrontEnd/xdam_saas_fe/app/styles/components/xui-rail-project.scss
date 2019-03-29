@@ -1,0 +1,68 @@
+.xui-rail-project {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+
+  // Sections fill height of rail when open
+  &-section {
+    &-open {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+
+      .mdc-list {
+        overflow: auto;
+        flex: 1;
+      }
+    }
+  }
+
+  // Arrow icons rotate when open
+  .xui-icon-open {
+    transform: rotate(90deg);
+  }
+
+  &-list {
+    &-title {
+      cursor: pointer;
+      background-color: map-get($xui-colors, black-lighten-2);
+      font-weight: $xui-global-medium-font-weight;
+      border-bottom: 2px solid map-get($xui-colors, black-lighten-1);
+    }
+  }
+
+  &-section {
+    &:last-child {
+      .xui-rail-project-list-title {
+        // Every section has a bottom border besides the last
+        border-bottom: none;
+      }
+    }
+  }
+
+  // Indicate the active folder/collection
+  .active {
+    color: map-get($xui-colors, primary);
+  }
+
+  // Giving links block sizing to fill height of click target
+  .mdc-list-item__text a {
+    display: inline-block;
+  }
+
+  // Subitems are offset
+  &-subitem {
+    padding-left: 24px;
+  }
+
+  // Back button is vertically aligned and fills entire click target
+  &-back {
+    flex: 1;
+    display: flex;
+    align-items: center;
+
+    svg {
+      padding: $xui-rail-list-item-padding;
+    }
+  }
+}

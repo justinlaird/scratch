@@ -1,0 +1,173 @@
+/**
+ * Material Design Variables
+ * https://github.com/material-components/material-components-web/blob/2027e1b/packages/mdc-theme/_variables.scss#L68
+ */
+
+/* ============= MDC Typography ============= */
+$mdc-typography-font-family: #{$xui-font-family};
+
+$mdc-typography-styles-headline1: (
+  font-size: 3rem,
+  line-height: 3rem,
+  font-weight: $xui-global-normal-font-weight,
+  letter-spacing: $xui-global-header-letter-spacing,
+  color: map-get($xui-colors, white),
+  margin: 0 0 0.3em 0,
+);
+
+$mdc-typography-styles-headline2: (
+  font-size: 2rem,
+  line-height: 2rem,
+  font-weight: $xui-global-bold-font-weight,
+  letter-spacing: $xui-global-header-letter-spacing,
+  color: map-get($xui-colors, white),
+  margin: 0 0 0.3em 0,
+);
+
+$mdc-typography-styles-headline3: (
+  font-size: 1.75rem,
+  line-height: 1.75rem,
+  font-weight: $xui-global-normal-font-weight,
+  letter-spacing: $xui-global-header-letter-spacing,
+  color: map-get($xui-colors, white),
+  margin: 0 0 0.3em 0,
+);
+
+$mdc-typography-styles-headline4: (
+  font-size: 1.5rem,
+  line-height: 1.5rem,
+  font-weight: $xui-global-bold-font-weight,
+  letter-spacing: $xui-global-header-letter-spacing,
+  color: map-get($xui-colors, white),
+  margin: 0 0 0.3em 0,
+);
+
+$mdc-typography-styles-headline5: (
+  font-size: 1.25rem,
+  line-height: 1.25rem,
+  font-weight: $xui-global-normal-font-weight,
+  letter-spacing: $xui-global-header-letter-spacing,
+  color: map-get($xui-colors, white),
+  margin: 0 0 0.3em 0,
+);
+
+$mdc-typography-styles-headline6: (
+  font-size: 1rem,
+  line-height: 1rem,
+  font-weight: $xui-global-bold-font-weight,
+  letter-spacing: $xui-global-header-letter-spacing,
+  color: map-get($xui-colors, white),
+  margin: 0 0 0.3em 0,
+);
+
+$mdc-typography-styles-headline6: (
+  font-size: 1rem,
+  line-height: 1rem,
+  font-weight: $xui-global-bold-font-weight,
+  letter-spacing: $xui-global-header-letter-spacing,
+  color: map-get($xui-colors, white),
+  margin: 0 0 0.3em 0,
+);
+
+$mdc-typography-styles-body1: (
+  font-size: 1rem,
+  line-height: 1rem,
+  font-weight: $xui-global-normal-font-weight,
+  letter-spacing: $xui-global-normal-letter-spacing,
+);
+
+$mdc-typography-styles-body2: (
+  font-size: 0.9rem,
+  line-height: 0.9rem,
+  font-weight: $xui-global-normal-font-weight,
+  letter-spacing: $xui-global-normal-letter-spacing,
+);
+
+$mdc-typography-styles-button: (
+  font-size: $xui-global-font-size,
+  font-weight: $xui-global-medium-font-weight,
+  text-transform: none,
+  letter-spacing: $xui-global-header-letter-spacing,
+  font-family: $mdc-typography-font-family,
+  line-height: 1,
+);
+
+$mdc-typography-styles-caption: (
+  font-size: 0.9rem,
+  letter-spacing: $xui-global-normal-letter-spacing,
+);
+
+$mdc-typography-styles-overline: (
+  font-size: 0.8rem,
+);
+
+// Overriding because we don't have all these weights
+$mdc-typography-font-weight-values: (
+  thin: $xui-global-normal-font-weight,
+  light: $xui-global-normal-font-weight,
+  regular: $xui-global-normal-font-weight,
+  medium: $xui-global-bold-font-weight,
+  bold: $xui-global-bold-font-weight,
+  black: $xui-global-bold-font-weight
+);
+
+/* ============= MDC Color ============= */
+$mdc-theme-primary: map-get($xui-colors, primary);
+$mdc-theme-secondary: map-get($xui-colors, success);
+$mdc-theme-surface: map-get($xui-colors, black-lighten-3);
+$mdc-theme-background: $xui-base-background;
+
+$mdc-theme-on-primary: map-get($xui-colors, white);
+$mdc-theme-on-secondary: map-get($xui-colors, white);
+$mdc-theme-on-surface: map-get($xui-colors, white-darken-1);
+$mdc-theme-on-background: map-get($xui-colors, white-darken-2); // NOTE: DO NOT SET background-theme!
+
+$mdc-theme-text-secondary-on-light: map-get($xui-colors, white-darken-1);
+
+/* ============= MDC Layout Grid ============= */
+$mdc-layout-grid-breakpoints: $xui-breakpoints;
+
+$mdc-layout-grid-default-gutter: (
+  desktop: $xui-global-spacing,
+  tablet: $xui-global-spacing,
+  phone: $xui-global-spacing
+);
+
+$mdc-layout-grid-default-margin: (
+  desktop: $xui-global-spacing,
+  tablet: $xui-global-spacing,
+  phone: $xui-global-spacing
+);
+
+/* ========== Material UI Components ========== */
+@import "@material/button/mdc-button";
+@import "@material/card/mdc-card";
+@import "@material/checkbox/mdc-checkbox";
+@import "@material/chips/mdc-chips";
+@import "@material/dialog/mdc-dialog";
+@import "@material/drawer/mdc-drawer";
+@import "@material/elevation/mdc-elevation";
+@import "@material/fab/mdc-fab";
+@import "@material/floating-label/mdc-floating-label";
+@import "@material/form-field/mdc-form-field";
+@import "@material/grid-list/mdc-grid-list";
+@import "@material/icon-button/mdc-icon-button";
+@import "@material/icon-toggle/mdc-icon-toggle";
+@import "@material/image-list/mdc-image-list";
+@import "@material/layout-grid/mdc-layout-grid";
+@import "@material/linear-progress/mdc-linear-progress";
+@import "@material/list/mdc-list";
+@import "@material/menu/mdc-menu";
+@import "@material/menu-surface/mdc-menu-surface";
+@import "@material/notched-outline/mdc-notched-outline";
+@import "@material/radio/mdc-radio";
+@import "@material/select/mdc-select";
+@import "@material/slider/mdc-slider";
+@import "@material/snackbar/mdc-snackbar";
+@import "@material/switch/mdc-switch";
+@import "@material/tabs/mdc-tabs";
+@import "@material/textfield/mdc-text-field";
+@import "@material/theme/mdc-theme";
+@import "@material/toolbar/mdc-toolbar";
+@import "@material/top-app-bar/mdc-top-app-bar";
+@import "@material/typography/mdc-typography";

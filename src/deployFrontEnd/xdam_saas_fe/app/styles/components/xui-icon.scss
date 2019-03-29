@@ -1,0 +1,28 @@
+$xui-icon-css-class: ".xui-icon";
+$xui-icon-spin-delay: 0.65s;
+$xui-icon-spin-iteration-count: infinite;
+$xui-icon-spin-timing-function: linear;
+
+// Keep this class once xui-icon component is phased out
+#{$xui-icon-css-class} {
+  width: 24px;
+  height: 24px;
+  fill: currentColor;
+  display: inline-block;
+  vertical-align: middle;
+
+  // Animation
+  &-spin {
+    animation: #{$xui-icon-css-class}-spin $xui-icon-spin-delay $xui-icon-spin-iteration-count $xui-icon-spin-timing-function;
+  }
+}
+
+@keyframes #{$xui-icon-css-class}-spin {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(359deg);
+  }
+}

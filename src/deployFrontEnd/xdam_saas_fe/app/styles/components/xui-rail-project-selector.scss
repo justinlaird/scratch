@@ -1,0 +1,43 @@
+$xui-rail-project-selector-search-height: 40px;
+$xui-rail-project-selector-search-height-mobile: 48px;
+
+.xui-rail-project-selector {
+  display: flex;
+  flex-direction: column;
+
+  &:focus {
+    outline: none;
+  }
+
+  &-search {
+    flex: 0 1 auto;
+
+    .xui-field {
+      height: $xui-rail-width;
+      width: 100%;
+      border-radius: 0;
+
+      .mdc-text-field__icon {
+        bottom: 12px; // Compensate for modified height
+      }
+
+      input {
+        padding-top: 0;
+        padding-bottom: 0;
+      }
+    }
+  }
+
+  &-list {
+    flex: 1;
+    overflow-y: auto;
+  }
+
+  // Styling the @handles in the project list
+  .mdc-list-item__meta {
+    color: map-get($xui-colors, white-darken-2);
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+  }
+}

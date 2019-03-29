@@ -1,0 +1,52 @@
+$FreestyleCollection-maxWidth: $FreestyleGuide-maxWidth !default;
+$FreestyleCollection-shadow1: rgba(0, 0, 0, 0.16);
+$FreestyleCollection-shadow2: rgba(0, 0, 0, 0.12);
+$FreestyleCollection-boxShadow: 0 2px 5px 0 $FreestyleCollection-shadow1, 0 2px 10px 0 $FreestyleCollection-shadow2;
+
+.FreestyleCollection {
+  &-title {
+    font-weight: bold;
+    font-size: 16px;
+    margin-bottom: $xui-global-spacing / 2;
+    margin-left: $xui-global-spacing;
+  }
+
+  &-variantList {
+    background-color: map-get($xui-colors, black-lighten-3);
+    color: $FreestyleGuide-color--foreground;
+    display: flex;
+    height: 48px;
+    list-style-type: none;
+    margin: 0 $xui-global-spacing $FreestyleGuide-spacing $xui-global-spacing;
+    overflow-x: auto;
+    overflow-y: hidden;
+    padding: 0;
+    position: relative;
+    white-space: nowrap;
+
+    @include mdc-elevation(5, map-get($xui-colors, black));
+  }
+
+  &-variantListItem {
+    cursor: pointer;
+    display: block;
+    flex-grow: 1;
+    float: left;
+    height: 48px;
+    letter-spacing: 0.8px;
+    line-height: 48px;
+    margin: 0;
+    min-width: 120px;
+    overflow: hidden;
+    padding: 0;
+    text-align: center;
+    text-overflow: ellipsis;
+    width: 15%;
+
+    &:hover,
+    &--active {
+      border-bottom: solid 3px $FreestyleGuide-color--primary;
+      color: $FreestyleGuide-color--primary;
+    }
+  }
+}

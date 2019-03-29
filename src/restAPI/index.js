@@ -1,9 +1,8 @@
 const serverless = require('serverless-http');
-
-const {JsonApiController, TokenController} = require('xdam-clique-api/controllers');
 const express = require('express');
 const bodyParser = require('body-parser');
 const config = require('config');
+const {JsonApiController, TokenController} = require('xdam-clique-api/controllers');
 
 const app = express();
 app.use(bodyParser.json());
@@ -23,10 +22,6 @@ app.use(function(req, res, next) {
   }
   return next();
 });
-
-
-const tokenRoute = config.get('jwt.tokenRoute');
-console.log(`Token route ${tokenRoute}`);
 
 app.use(config.get('jwt.tokenRoute'), TokenController);
 app.use('/', JsonApiController);

@@ -1,0 +1,34 @@
+# See https://help.github.com/ignore-files/ for more about ignoring files.
+
+# compiled output
+/dist
+/tmp
+/dist-*/
+
+# dependencies
+/bower_components/
+/node_modules/
+
+# misc
+/.sass-cache
+/connect.lock
+.DS_Store
+jsconfig.json
+/coverage/
+/iteration-dist/
+/libpeerconnection.log
+/npm-debug.log*
+/testem.log
+/yarn-error.log
+.sasslintrc
+
+
+# ember-try
+/.node_modules.ember-try/
+/bower.json.ember-try
+/package.json.ember-try
+
+# !! Don't let ember-cli-upgrade remove the following line !!
+.env
+
+*.code-workspace

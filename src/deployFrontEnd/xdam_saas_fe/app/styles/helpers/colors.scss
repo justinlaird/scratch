@@ -1,0 +1,14 @@
+@each $name, $value in $xui-colors {
+  .xui-#{"" + $name}-color {
+    color: $value !important;
+    fill: $value !important;
+  }
+
+  .xui-#{"" + $name}-bg {
+    background-color: $value !important;
+  }
+
+  .xui-#{"" + $name}-border {
+    border-color: $value !important;
+  }
+}

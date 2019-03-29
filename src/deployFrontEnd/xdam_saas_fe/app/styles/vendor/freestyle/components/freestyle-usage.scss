@@ -1,0 +1,71 @@
+$FreestyleUsage-borderColor: map-get($xui-colors, black-lighten-4) !default;
+
+.FreestyleUsage {
+  display: flex;
+  flex-direction: column;
+  margin-top: $xui-global-spacing;
+
+  &-title {
+    order: 2;
+    font-weight: bold;
+    padding-left: $xui-global-spacing;
+    font-size: $xui-global-font-size;
+    margin-bottom: $xui-global-spacing / 2;
+    margin-top: $FreestyleGuide-spacing;
+  }
+
+  &-notes {
+    order: 1;
+    font-size: $xui-global-font-size;
+  }
+
+  &-rendered {
+    order: 3;
+    padding: $xui-global-spacing * 2;
+    margin: 0 $xui-global-spacing $FreestyleGuide-spacing $xui-global-spacing;
+    background-color: map-get($xui-colors, black-lighten-3);
+
+    @include mdc-elevation(5, map-get($xui-colors, black));
+  }
+
+  &-snippet {
+    pre {
+      font-size: $xui-global-font-size;
+      margin-top: 0;
+      margin-bottom: $FreestyleGuide-spacing;
+
+      &.hljs {
+        background-color: map-get($xui-colors, black-lighten-1);
+        padding: $xui-global-spacing * 2;
+      }
+    }
+  }
+
+  &-usage {
+    order: 4;
+  }
+
+  &--inline {
+    border-bottom: 0;
+    display: inline-block;
+    margin-bottom: 0;
+    padding-bottom: 0;
+    width: 100%;
+
+    @include freestyle-breakpoint(large) {
+      max-width: inherit;
+      width: auto;
+    }
+  }
+
+  &-focusCta {
+    cursor: pointer;
+    fill: map-get($xui-colors, white-darken-2);
+    position: relative;
+    top: 1px;
+
+    &:hover {
+      fill: $FreestyleGuide-color--primary;
+    }
+  }
+}

@@ -1,0 +1,100 @@
+.xui-container-list {
+  &-xsmall-thumb {
+    height: 16px;
+  }
+
+  .xui-container-list-row:nth-child(odd) {
+    background-color: darken($mdc-theme-surface, 1);
+  }
+
+  .xui-container-list-row:nth-child(even) {
+    background-color: lighten($mdc-theme-surface, 1);
+  }
+
+  .xui-container-list-content {
+    @extend .mdc-list;
+
+    margin-top: 1rem;
+    background-color: $mdc-theme-surface;
+    display: grid;
+    grid-template-columns: repeat(5, minmax(50px, 1fr));
+    max-width: 90vw;
+    padding: 0;
+  }
+
+  .mdc-list-item--selected {
+    border: solid 2px;
+    border-color: $mdc-theme-primary;
+  }
+
+  .xui-container-list-row:hover {
+    @extend .mdc-list-item--selected;
+  }
+
+  .xui-container-list-header {
+    @extend .mdc-list-item;
+
+    background-color: lighten($mdc-theme-surface, 1);
+    grid-column: 1 / -1;
+    display: grid;
+    grid-template-columns: repeat(5, minmax(50px, 1fr));
+  }
+
+  .xui-container-list-row {
+    @extend .mdc-list-item;
+
+    grid-column: 1 / -1;
+    display: grid;
+    grid-template-columns: repeat(5, minmax(50px, 1fr));
+    border: solid 2px transparent;
+  }
+
+  .xui-container-list-cell {
+    @include mdc-typography-overflow-ellipsis();
+
+    display: inline-block;
+    color: $mdc-theme-on-surface;
+  }
+
+  .xui-data-header-cell {
+    @include mdc-typography-overflow-ellipsis();
+
+    display: inline-block;
+    color: $mdc-theme-on-surface;
+  }
+
+  .xui-container-list-link {
+    color: $mdc-theme-on-surface;
+    text-decoration: none;
+  }
+
+  .xui-container-list-link:hover {
+    color: lighten($mdc-theme-on-surface, 30);
+  }
+
+  .xui-data-header-cell-sort {
+    position: relative;
+  }
+
+  .xui-data-header-cell-sort::before,
+  .xui-data-header-cell-sort::after {
+    border: 6px solid transparent;
+    content: "";
+    display: block;
+    height: 0;
+    right: 20px;
+    top: 35%;
+    position: absolute;
+    width: 0;
+  }
+
+  .xui-data-header-cell-sort::before {
+    border-bottom-color: #666;
+    margin-top: -9px;
+  }
+
+  .xui-data-header-cell-sort::after {
+    border-top-color: #666;
+    margin-top: 5px;
+  }
+}

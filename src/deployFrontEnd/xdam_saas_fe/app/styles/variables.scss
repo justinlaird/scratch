@@ -1,0 +1,59 @@
+$xui-colors: (
+  primary: #2284ff,
+  primary-on: darken(#2284ff, 10),
+  success: #3adb76,
+  success-on: darken(#3adb76, 10),
+  warning: #ffae00,
+  alert: #cc4b37,
+  white: #fefefe,
+  white-darken-1: #b2b3b4,
+  white-darken-2: #666f73,
+  black: #181b1e,
+  black-lighten-1: #1b1e22,
+  black-lighten-2: #1f2327,
+  black-lighten-3: #282b2f,
+  black-lighten-4: #383b3f
+);
+
+$xui-breakpoints: (
+  desktop: 1024px,
+  tablet: 860px,
+  phone: 0px
+);
+
+/* ============= Globals ============= */
+
+// Space between elements should always be a multiple of spacing base
+$xui-global-spacing: 16px;
+$xui-global-border: 1px solid map-get($xui-colors, black-lighten-4);
+$xui-global-radius: 2px;
+$xui-base-background: map-get($xui-colors, black-lighten-1);
+
+/* ============= Typography ============= */
+$xui-body-font-size-mobile: 16px;
+$xui-body-font-size: 15px;
+$xui-font-family: Lato, sans-serif;
+
+$xui-global-normal-font-weight: 400;
+$xui-global-medium-font-weight: 700;
+$xui-global-bold-font-weight: 900;
+$xui-global-font-size: 1rem;
+
+$xui-global-normal-letter-spacing: 0.015em;
+$xui-global-header-letter-spacing: 0.015em;
+
+$xui-font-header-color: map-get($xui-colors, white);
+$xui-font-body-color: map-get($xui-colors, white-darken-1);
+$xui-font-secondary-color: map-get($xui-colors, white-darken-2);
+
+/* ============= XuiRail ============= */
+$xui-rail-width: 48px;
+$xui-rail-content-width: 300px;
+$xui-rail-border-width: 2px;
+$xui-rail-mobile-height: 65px;
+
+/* ============= XuiTopAppBar ============= */
+$xui-top-app-bar-height: $xui-rail-width;
+
+/* ============= XuiCard ============= */
+$xui-card-gutter: 10px;

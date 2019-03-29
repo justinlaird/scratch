@@ -1,0 +1,8 @@
+#!/bin/sh -eux
+
+# This script is intended to be run inside the built docker environment.
+# Runs tests.
+
+yarn install --non-interactive
+yarn upgrade img-db
+yarn run test

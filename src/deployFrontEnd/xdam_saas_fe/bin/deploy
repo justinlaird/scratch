@@ -1,0 +1,8 @@
+#!/bin/sh -eux
+
+# This script is intended to be run inside the built docker environment.
+# Deploy via ember-cli-deploy to s3.
+
+yarn install --non-interactive
+yarn upgrade img-db
+yarn run deploy:prod

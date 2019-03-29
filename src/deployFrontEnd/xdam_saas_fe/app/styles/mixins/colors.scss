@@ -1,0 +1,9 @@
+@mixin dark-background() {
+  background-color: $mdc-theme-background;
+  color: $mdc-theme-on-surface;
+}
+
+@mixin light-background() {
+  background-color: $mdc-theme-background;
+  color: $mdc-theme-on-surface;
+}

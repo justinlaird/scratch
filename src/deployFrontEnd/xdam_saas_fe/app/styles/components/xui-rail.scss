@@ -1,0 +1,251 @@
+$xui-rail-border-color: $mdc-theme-background;
+$xui-rail-tab-color: map-get($xui-colors, white-darken-1);
+$xui-rail-tab-color-active: map-get($xui-colors, primary);
+
+$xui-rail-list-item-padding: 0 4px;
+$xui-rail-list-item-height: 40px;
+$xui-rail-list-item-color: map-get($xui-colors, white-darken-1);
+
+$xui-rail-list-item-mobile-padding: 0 12px;
+$xui-rail-list-item-mobile-height: 48px;
+
+.xui-rail {
+  height: 100%;
+  display: inline-flex;
+  background-color: map-get($xui-colors, black-lighten-3);
+
+  @include breakpoint(desktop, down) {
+    flex-direction: column;
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 1;
+  }
+
+  &-content-wrapper {
+    width: 300px;
+
+    > *:first-child {
+      height: 100%;
+    }
+
+    @include breakpoint(desktop, down) {
+      order: 1;
+      height: calc(100% - #{$xui-rail-mobile-height});
+      width: 100%;
+      flex: 1;
+    }
+  }
+
+  /* ========== Begin Tabs Styles ========== */
+
+  &-tabs-wrapper {
+    background-color: map-get($xui-colors, black-lighten-3);
+
+    @include breakpoint(desktop, up) {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    @include breakpoint(desktop, down) {
+      order: 2;
+      padding: ($xui-global-spacing / 2) 0;
+      border-top: $xui-rail-border-width solid $xui-rail-border-color;
+    }
+  }
+
+  &-tabs-secondary {
+    @include breakpoint(desktop, down) {
+      display: none;
+    }
+  }
+
+  &-tabs-primary {
+    @include breakpoint(desktop, down) {
+      display: flex;
+      justify-content: space-around;
+    }
+  }
+
+  &-tab {
+    cursor: pointer;
+    text-align: center;
+    padding: $xui-global-spacing * 0.75;
+    display: flex;
+
+    @include breakpoint(desktop, up) {
+      line-height: 0;
+    }
+
+    @include breakpoint(desktop, down) {
+      display: inline-block;
+      padding: $xui-global-spacing / 4;
+    }
+
+    &.xui-rail-tab-active,
+    &.xui-rail-tab-active svg,
+    &.xui-rail-tab-active .xui-rail-tab-text {
+      color: $xui-rail-tab-color-active;
+      fill: $xui-rail-tab-color-active;
+    }
+
+    &-text {
+      font-weight: $xui-global-medium-font-weight;
+      font-size: 0.875rem;
+    }
+  }
+
+  /* ========== End Tabs Styles ========== */
+
+  /* ========== Begin Divider Styles ========== */
+
+  &-divider-row {
+    background-color: $xui-rail-border-color;
+    cursor: row-resize;
+    height: $xui-rail-border-width;
+  }
+
+  &-divider-column {
+    background-color: $xui-rail-border-color;
+    cursor: col-resize;
+    width: $xui-rail-border-width;
+
+    @include breakpoint(desktop, down) {
+      display: none;
+    }
+  }
+
+  &-divider-row,
+  &-divider-column {
+    @include breakpoint(desktop, up) {
+      &:hover {
+        background-color: map-get($xui-colors, primary);
+      }
+    }
+  }
+
+  /* ========== End Divider Styles ========== */
+
+  /* ========== Begin Directional Styles ========== */
+
+  &-left {
+    .xui-rail-tabs-wrapper {
+      @include breakpoint(desktop, up) {
+        border-right: $xui-rail-border-width solid $xui-rail-border-color;
+      }
+    }
+  }
+
+  &-right {
+    .xui-rail-divider-column {
+      order: 1;
+    }
+
+    .xui-rail-content-wrapper {
+      order: 2;
+    }
+
+    .xui-rail-tabs-wrapper {
+      order: 3;
+    }
+
+    .xui-rail-tabs-wrapper {
+      @include breakpoint(desktop, up) {
+        border-left: $xui-rail-border-width solid $xui-rail-border-color;
+      }
+    }
+  }
+
+  /* ========== End Directional Styles ========== */
+
+  /* ========== Begin Closed Rail Styles ========== */
+
+  @include breakpoint(desktop, down) {
+    &-closed {
+      height: $xui-rail-mobile-height;
+
+      .xui-rail-content-wrapper {
+        display: none;
+      }
+
+      // When panel closed on mobile, no tabs should appear active
+      .xui-rail-tab-active,
+      .xui-rail-tab-active svg,
+      .xui-rail-tab-active .xui-rail-tab-text {
+        color: $xui-rail-tab-color;
+        fill: $xui-rail-tab-color;
+      }
+    }
+  }
+
+  @include breakpoint(desktop, up) {
+    &-closed {
+      .xui-rail-tabs-wrapper {
+        // The border-right creates separation between rail content and rail tabs.
+        // Not needed when content is collapsed.
+        border: none;
+      }
+
+      .xui-rail-content-wrapper {
+        display: none;
+      }
+    }
+  }
+
+  /* ========== End Closed Rail Styles ========== */
+
+  /**
+   * ========== Begin Rail List Styles ==========
+   * Note: the following styles are meant to be used within panels to have consistent
+   * rail item styles. Use in combination with mdc list selectors.
+   */
+
+  &-list {
+    &-item {
+      padding: $xui-rail-list-item-padding;
+      height: $xui-rail-list-item-height;
+      line-height: $xui-rail-list-item-height;
+      color: $xui-rail-list-item-color;
+      fill: $xui-rail-list-item-color;
+
+      // NOTE: For some reason the text overflow needs this rule. Smells fishy.
+      .mdc-list-item__text {
+        max-width: 100%;
+      }
+
+      .mdc-list-item__graphic,
+      .mdc-list-item__meta,
+      .mdc-list-item__text {
+        margin-right: 0;
+        height: $xui-rail-list-item-height;
+        line-height: $xui-rail-list-item-height;
+        padding: $xui-rail-list-item-padding;
+
+        @include breakpoint(desktop, down) {
+          height: $xui-rail-list-item-mobile-height;
+          line-height: $xui-rail-list-item-mobile-height;
+          padding: $xui-rail-list-item-mobile-padding;
+        }
+      }
+    }
+  }
+
+  /* ========== End Rail List Styles ========== */
+
+  /* ========== Begin Rail Top Item Styles ========== */
+
+  &-top-item {
+    height: $xui-rail-width;
+    line-height: $xui-rail-width;
+    padding: $xui-rail-list-item-padding;
+    border-bottom: $xui-rail-border-width solid $xui-rail-border-color;
+    display: flex;
+    justify-content: center;
+    max-width: 100%;
+    flex: 0 1 auto;
+  }
+
+  /* ========== End Rail Top Item Styles ========== */
+}

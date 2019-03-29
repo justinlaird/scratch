@@ -1,0 +1,15 @@
+/* ============== Text Alignment ============== */
+
+$xui-typography-alignment: 'center' 'left' 'right';
+
+@each $alignment in $xui-typography-alignment {
+  .xui-text-#{$alignment} {
+    text-align: #{$alignment} !important;
+  }
+}
+
+.xui-text-truncate {
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}

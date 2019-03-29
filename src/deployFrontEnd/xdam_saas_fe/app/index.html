@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>XdamSaasFe</title>
+    <meta name="description" content="">
+
+    {{content-for "head"}}
+
+    {{content-for "head-footer"}}
+  </head>
+  <body class="mdc-typography">
+	  {{content-for "body"}}
+
+    <script defer src="{{rootURL}}assets/vendor.js"></script>
+    <script defer src="{{rootURL}}assets/xdam-saas-fe.js"></script>
+
+    {{content-for "body-footer"}}
+  </body>
+</html>

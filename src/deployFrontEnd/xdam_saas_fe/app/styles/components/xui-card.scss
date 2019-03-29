@@ -1,0 +1,87 @@
+$xui-card-gutter-half: 5px;
+$xui-card-border-width: 3px;
+$xui-card-vertical-padding: 17px;
+$xui-card-color: $xui-font-body-color;
+$xui-card-background-color: map-get($xui-colors, black-lighten-3);
+
+.xui-card {
+  background-color: $xui-card-background-color;
+  border: $xui-card-gutter-half solid $xui-base-background;
+  box-sizing: border-box;
+  position: relative;
+  color: $xui-card-color;
+
+  &__inner {
+    box-sizing: border-box;
+    border: $xui-card-border-width solid $xui-card-background-color;
+    padding: $xui-card-gutter - $xui-card-border-width;
+  }
+
+  &--selected {
+    .xui-card__inner {
+      border-color: map-get($xui-colors, primary);
+    }
+  }
+
+  &--square {
+    .xui-card__inner {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      right: 0;
+      left: 0;
+    }
+  }
+
+  &__text {
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+  }
+
+  &__img {
+    width: 100%;
+    height: calc(100% - #{($xui-card-vertical-padding * 2) + ($xui-card-gutter * 2)});
+    background-origin: border-box;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+  }
+
+  &__before-img,
+  &__after-img {
+    height: $xui-card-vertical-padding;
+    display: flex;
+    flex-flow: row nowrap;
+
+    @include breakpoint(desktop, up) {
+      visibility: hidden;
+    }
+  }
+
+  &__before-img {
+    justify-content: center;
+    align-content: flex-start;
+    padding-bottom: $xui-card-gutter;
+  }
+
+  &__after-img {
+    justify-content: space-between;
+    align-content: flex-end;
+    padding-top: $xui-card-gutter;
+
+    svg {
+      fill: $xui-card-color;
+      width: $xui-card-vertical-padding;
+      height: $xui-card-vertical-padding;
+    }
+  }
+
+  // Show contents of before and after image when hovering card
+  &:hover {
+    .xui-card__after-img,
+    .xui-card__before-img {
+      visibility: visible;
+    }
+  }
+}

@@ -1,0 +1,18 @@
+{{#xui-dialog
+  title=title
+  buttons=(array (hash name="Cancel" default=false) (hash name="Create" default=true))
+  initialFocusSelector="input:first-child"
+  slug="xui-dialog-new-resource"
+  willOpen=(action "willOpen")
+  willClose=(action "willClose")
+  didClose=(action "didClose")}}
+
+  <div>
+    {{input
+      name="name"
+      type="text"
+      value=(get values "recordName")
+      placeholder="name..."}}
+  </div>
+
+{{/xui-dialog}}

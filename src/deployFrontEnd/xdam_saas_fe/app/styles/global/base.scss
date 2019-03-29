@@ -1,0 +1,54 @@
+html {
+  font-family: $mdc-typography-font-family;
+  font-size: $xui-body-font-size-mobile;
+  font-weight: $xui-global-normal-font-weight;
+  letter-spacing: $xui-global-normal-letter-spacing;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
+
+  @include breakpoint(desktop, up) {
+    font-size: $xui-body-font-size;
+  }
+
+  &.xui-no-scroll,
+  &.xui-no-scroll body {
+    overflow: hidden;
+    position: fixed;
+  }
+}
+
+body {
+  display: flex;
+  padding: 0;
+  margin: 0;
+  height: 100vh;
+  background: $xui-base-background;
+  color: $xui-font-body-color;
+  position: relative;
+  width: 100%;
+
+  @include breakpoint(desktop, down) {
+    padding-bottom: $xui-rail-mobile-height;
+  }
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+
+  &:hover {
+    color: map-get($xui-colors, primary);
+    fill: map-get($xui-colors, primary);
+  }
+
+  &:focus {
+    outline: none;
+  }
+}
+
+hr {
+  border-top: 0;
+  border-left: 0;
+  border-right: 0;
+  border-bottom: 1px solid map-get($xui-colors, black-lighten-4);
+}

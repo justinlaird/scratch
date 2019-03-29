@@ -1,0 +1,8 @@
+{{#if initialized}}
+  {{#xui-menu/menu closeMenu=closeMenu eventType=eventType}}
+    {{yield (hash
+      item=(component "xui-menu/item" closeMenu=closeMenu)
+      divider=(component "xui-menu/divider")
+    )}}
+  {{/xui-menu/menu}}
+{{/if}}

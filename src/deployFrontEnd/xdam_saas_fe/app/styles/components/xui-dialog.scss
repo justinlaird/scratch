@@ -1,0 +1,3 @@
+.xui-dialog {
+  @include mdc-dialog-scrim-color(map-get($xui-colors, black-lighten-1), 0.7);
+}

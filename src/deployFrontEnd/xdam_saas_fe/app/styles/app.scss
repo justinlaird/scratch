@@ -1,0 +1,70 @@
+/* ========== Variables ========== */
+@import "./variables";
+
+/* ========== Mixins ========== */
+@import "./mixins/index";
+@import "./mixins/colors";
+@import "./mixins/breakpoints";
+
+/* ========== Vendors ========== */
+@import "./vendor/normalize";
+@import "./vendor/liquid-fire";
+@import "./vendor/material-design";
+@import "./vendor/file-upload";
+
+/* ========== Addons ========== */
+// Place at top to avoid accidentally override styles used by rest of app.
+@import 'ember-power-select/themes/material';
+// https://github.com/cibernox/ember-power-select/blob/master/app/styles/ember-power-select/variables.scss
+@import "ember-power-select";
+
+/* ========== Global Styles ========== */
+@import "./global/base";
+
+/* ========== layout components, in dom tree order ========== */
+@import "./components/xui-rail";
+@import "./components/xui-rail-project";
+@import "./components/xui-top-app-bar";
+@import "./components/xui-menu";
+@import "./components/xui-content";
+@import "./components/xui-main";
+@import "./components/xui-form-elements";
+@import "./components/xui-rail-project-selector";
+
+/* ========== addon/re-usable components ========== */
+@import "./components/login";
+@import "./components/xui-card";
+@import "./components/xui-container-list";
+@import "./components/xui-icon";
+@import "./components/xui-menu";
+@import "./components/xui-container-grid";
+@import "./components/xui-container-view";
+@import "./components/xui-dialog";
+@import "./components/xui-button";
+@import "./components/xui-field";
+
+/* ========== development only ========== */
+// TODO: development only, filter out with brocolli on prod builds
+@import "./vendor/swagger-ui";
+@import "./vendor/freestyle";
+
+/* ========== Helpers ========== */
+@import "./helpers/colors";
+@import "./helpers/spacing";
+@import "./helpers/typography";
+@import "./helpers/borders";
+@import "./helpers/visibility";
+@import "./helpers/display";
+@import "./helpers/alignment";
+@import "./helpers/cursor";
+@import "./helpers/animation";
+
+.xui-container-list :not(.mdc-list--non-interactive) > .xui-container-list-row {
+  will-change: unset;
+  contain: layout;
+}
+
+:not(.mdc-list--non-interactive) > .mdc-list-item {
+  will-change: unset;
+  contain: layout;
+}
