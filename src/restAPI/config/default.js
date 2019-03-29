@@ -2,7 +2,7 @@ module.exports = {
   "server": {
     "protocol": "https",
     "hostname": "0.0.0.0",
-    "port": 443,
+    "port": null,
     "internalPort": 80,
     "address": "0.0.0.0",
     "accessControlAllow": ["*"]
