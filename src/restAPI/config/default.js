@@ -1,6 +1,6 @@
 module.exports = {
   "server": {
-    "protocol": "http",
+    "protocol": "https",
     "hostname": "0.0.0.0",
     "port": 80,
     "internalPort": 80,
