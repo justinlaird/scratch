@@ -164,6 +164,7 @@ Resources:
         Variables:
           BUCKET_NAME: !Ref EmberApp
           BUCKET_ARN: !GetAtt EmberApp.Arn
+          API_URL: !Sub https://${Api}.execute-api.${AWS::Region}.amazonaws.com/${Api.Stage}
     Metadata:
       StackeryName: DeployFrontEnd
   DeployFrontEndDeployTrigger:
