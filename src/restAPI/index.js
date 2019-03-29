@@ -26,6 +26,9 @@ app.use(function(req, res, next) {
 });
 */
 
+const tokenRoute = config.get('jwt.tokenRoute');
+console.log(`Token route ${tokenRoute}`);
+
 app.use(config.get('jwt.tokenRoute'), TokenController);
 app.use('/', JsonApiController);
 module.exports.handler = serverless(app);
