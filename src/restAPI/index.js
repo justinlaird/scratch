@@ -8,7 +8,7 @@ const config = require('config');
 const app = express();
 app.use(bodyParser.json());
 
-/*
+
 app.use(function(req, res, next) {
   res.setHeader('Access-Control-Allow-Headers', req.headers['access-control-request-headers'] || '');
   if (Array.isArray(config.get('server.accessControlAllow'))) {
@@ -24,7 +24,7 @@ app.use(function(req, res, next) {
   }
   return next();
 });
-*/
+
 
 const tokenRoute = config.get('jwt.tokenRoute');
 console.log(`Token route ${tokenRoute}`);
