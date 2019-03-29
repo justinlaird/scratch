@@ -22,6 +22,9 @@ tokenAuth.validateToken = (token) => {
 }
 
 tokenAuth.authorizeUser = async function(req, res) {
+
+  console.log("AUTHORIZE USERS CALLED:");
+  console.log(req);
   let authUserId = null;
 
   let params =  {
