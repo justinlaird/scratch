@@ -126,7 +126,7 @@ Resources:
           DB_ARN: !Sub arn:aws:rds:${AWS::Region}:${AWS::AccountId}:cluster:${Database}
           DB_USER: !Ref EnvConfigmySQLUserAsString
           DB_PASSWORD: !Ref EnvConfigmySQLPasswordAsString
-          API_HOSTNAME: !Ref EnvConfigapiHostNameAsString
+          SERVER_HOSTNAME: !Ref EnvConfigapiHostNameAsString
       Events:
         ApiANYany:
           Type: Api
