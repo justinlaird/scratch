@@ -127,6 +127,8 @@ Resources:
           DB_USER: !Ref EnvConfigmySQLUserAsString
           DB_PASSWORD: !Ref EnvConfigmySQLPasswordAsString
           SERVER_HOSTNAME: !Ref EnvConfigapiHostNameAsString
+          SERVER_PORT: ''''''
+          SERVER_PROTOCOL: https
       Events:
         ApiANYany:
           Type: Api
