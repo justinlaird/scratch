@@ -36,7 +36,6 @@ function authorizeWriteRequest(request, data, callback) {
 }
 
 function authorizeReadRequest(request, callback) {
-  /*
   let authToken = null;
   if (request.headers && request.headers.authorization) {
     authToken = request.headers.authorization.replace('Bearer ', '');
@@ -53,7 +52,5 @@ function authorizeReadRequest(request, callback) {
       status: '401'
     });
   }
-  */
-
   callback(null, request);
 }
