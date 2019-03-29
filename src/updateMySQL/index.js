@@ -20,10 +20,12 @@ exports.handler = async message => {
       }
     );
     await sequelize.query(`CREATE DATABASE IF NOT EXISTS ${config.get('database.databaseName')}`);
+
     jsonApiService.initialize(null, true);
     jsonApiStore.populateDatabase();
     await delay(10 * 60 * 1000);
     console.log("Finished Delay");
+
   } catch (error) {
     console.log("Error during UpdateMySQL");
     console.log(error);
@@ -33,6 +35,3 @@ exports.handler = async message => {
   }
   return {};
 }
-
-
-//exports.handler("THE message is this!");

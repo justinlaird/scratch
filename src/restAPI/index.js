@@ -1,12 +1,13 @@
 const serverless = require('serverless-http');
 
-const {JsonApiController} = require('xdam-clique-api/controllers');
+const {JsonApiController, TokenController} = require('xdam-clique-api/controllers');
 const express = require('express');
 const bodyParser = require('body-parser');
 
 const app = express();
 app.use(bodyParser.json());
 app.use('/', JsonApiController);
+app.use(config.get('jwt.tokenRoute'), TokenController);
 module.exports.handler = serverless(app);
 
 
