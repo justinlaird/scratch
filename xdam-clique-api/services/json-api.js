@@ -44,9 +44,9 @@ JsonApiService.initialize = function(router, createDb = false) {
         }
      }
     },
-    protocol: 'http',
+    protocol: config.get('server.protocol'),
     hostname: config.get('server.hostname'),
-    //port: config.get('server.port'),
+    port: config.get('server.port'),
     base: 'rest',
     meta: {
       description: 'API for Clique'
