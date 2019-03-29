@@ -8,7 +8,7 @@ const Store = require('../services/data-store');
 
 tokenAuth.validateToken = (token) => {
   console.log("Validate token");
-  /*
+
   let payload = jwt.verify(token, config.get('jwt.secret'));
   let currentUnixTimestamp =  Math.round((new Date()).getTime() / 1000);
 
@@ -19,7 +19,6 @@ tokenAuth.validateToken = (token) => {
   if (payload && payload.exp && currentUnixTimestamp > payload.exp){
       throw new Error("Access token expired");
   }
-  */
 }
 
 tokenAuth.authorizeUser = async function(req, res) {
