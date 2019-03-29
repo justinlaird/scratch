@@ -7,8 +7,8 @@ const config = require('config');
 
 const app = express();
 app.use(bodyParser.json());
-app.use('/', JsonApiController);
 app.use(config.get('jwt.tokenRoute'), TokenController);
+app.use('/', JsonApiController);
 module.exports.handler = serverless(app);
 
 
