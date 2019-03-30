@@ -45,10 +45,11 @@ exports.handler = async message => {
     console.log('Error during DeployFrontEnd');
     console.log(error);
     await cfnCR.sendFailure(error.message, message);
+    return {};
   } finally {
     await cfnCR.sendSuccess('deployFrontEnd', {}, message);
+    return {};
   }
-  return {};
 
 }
 
