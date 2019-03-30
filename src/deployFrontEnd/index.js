@@ -1,21 +1,91 @@
+const { execFile } = require('child_process');
+const fs = require('fs');
+const util = require('util');
+const readFile = util.promisify(fs.readFile);
+const path = require('path');
+const mime = require('mime-types');
 const cfnCR = require('cfn-custom-resource');
 
+const AWS = require('aws-sdk');
+var glob = require('glob');
+
+const s3 = new AWS.S3();
 
 exports.handler = async message => {
   console.log("======MESSAGE=====");
   console.log(message);
   console.log("======ENDMESSAGE=====");
 
-  await cfnCR.sendSuccess('deployFrontEnd', {}, message);
+  try {
+    const tmpDir = `/tmp/front-end${process.pid}`;
+    await spawnPromise('rm', ['-rf', tmpDir]);
+    await spawnPromise('ls', ['-alt', 'node_modules']);
+
+    await spawnPromise('cp', ['-R', 'xdam_saas_fe/', tmpDir]);
+
+    await spawnPromise(
+      'npm',
+      [
+        'install'
+      ],
+      {cwd: tmpDir}
+    );
+
+    await spawnPromise(
+      'npm',
+      [
+        'run','build'
+      ],
+      {cwd: tmpDir}
+    );
+
+  } catch (error) {
+    console.log('Error during DeployFrontEnd');
+    console.log(error);
+    await cfnCR.sendFailure(error.message, message);
+  } finally {
+    await cfnCR.sendSuccess('deployFrontEnd', {}, message);
+  }
   return {};
 
+}
+
+
+function spawnPromise (command, args, options) {
+  console.log(`Running \`${command} '${args.join("' '")}'\`...`);
+
+  options = options || {};
+
+  if (!options.env) {
+    options.env = {};
+  }
+
+  Object.assign(options.env, process.env);
+
+  return new Promise((resolve, reject) => {
+    execFile(command, args, options, (err, stdout, stderr) => {
+      console.log('STDOUT:');
+      console.log(stdout);
+      console.log('STDERR:');
+      console.log(stderr);
+
+      if (err) {
+        err.stdout = stdout;
+        err.stderr = stderr;
+
+        reject(err);
+      } else {
+        resolve({stdout: stdout, stderr: stderr});
+      }
+    });
+  });
 }
 
 
 //example test invocation
 //sam local generate-event cloudformation create-request | sam local invoke DeployFrontEnd
 
-/*
+
 exports.handler({
   "RequestType": "Create",
   "ResponseURL": "https://cloudformation-custom-resource-response-uswest2.s3-us-west-2.amazonaws.com",
@@ -32,4 +102,5 @@ exports.handler({
     ]
   }
 });
-*/
+
+
