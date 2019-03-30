@@ -19,13 +19,15 @@ exports.handler = async message => {
   try {
     const tmpDir = `/tmp/front-end${process.pid}`;
     await spawnPromise('rm', ['-rf', tmpDir]);
-    await spawnPromise('ls', ['-alt', 'node_modules']);
-
     await spawnPromise('cp', ['-R', 'xdam_saas_fe/', tmpDir]);
 
     await spawnPromise(
       'npm',
-      [
+      ['--production',
+      '--no-progress',
+      '--loglevel=error',
+      '--cache', path.join('/tmp', 'npm'),
+      '--userconfig', path.join('/tmp', 'npmrc'),
         'install'
       ],
       {cwd: tmpDir}
@@ -33,7 +35,11 @@ exports.handler = async message => {
 
     await spawnPromise(
       'npm',
-      [
+      ['--production',
+      '--no-progress',
+      '--loglevel=error',
+      '--cache', path.join('/tmp', 'npm'),
+      '--userconfig', path.join('/tmp', 'npmrc'),
         'run','build'
       ],
       {cwd: tmpDir}
