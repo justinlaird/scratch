@@ -34,13 +34,9 @@ exports.handler = async message => {
     );
 
     await spawnPromise(
-      'npm',
-      ['--production',
-      '--no-progress',
-      '--loglevel=error',
-      '--cache', path.join('/tmp', 'npm'),
-      '--userconfig', path.join('/tmp', 'npmrc'),
-        'run','build'
+      `${tmpDir}/node_modules/ember-cli/bin/ember`,
+      [
+        'build'
       ],
       {cwd: tmpDir}
     );
@@ -91,7 +87,7 @@ function spawnPromise (command, args, options) {
 //example test invocation
 //sam local generate-event cloudformation create-request | sam local invoke DeployFrontEnd
 
-
+/*
 exports.handler({
   "RequestType": "Create",
   "ResponseURL": "https://cloudformation-custom-resource-response-uswest2.s3-us-west-2.amazonaws.com",
@@ -108,5 +104,7 @@ exports.handler({
     ]
   }
 });
+*/
+
 
 
