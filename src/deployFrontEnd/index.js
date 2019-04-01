@@ -17,6 +17,36 @@ exports.handler = async message => {
   console.log("======ENDMESSAGE=====");
 
   try {
+
+    const tmpDir = `/tmp/front-end${process.pid}`;
+
+    const npm = 'npm';
+    await spawnPromise('rm', ['-rf', tmpDir]);
+    await spawnPromise('cp', ['-R', 'xdam_saas_fe/', tmpDir]);
+    await spawnPromise(
+      npm,
+      ['--production',
+        '--no-progress',
+        '--loglevel=error',
+        '--cache', path.join('/tmp', 'npm'),
+        '--userconfig', path.join('/tmp', 'npmrc'),
+        'install'
+      ],
+      {cwd: tmpDir}
+    );
+    await spawnPromise(
+      npm,
+      ['--production',
+        '--no-progress',
+        '--loglevel=error',
+        '--cache', path.join('/tmp', 'npm'),
+        '--userconfig', path.join('/tmp', 'npmrc'),
+        'run', 'build'
+      ],
+      {cwd: tmpDir}
+    );
+
+    /*
     const tmpDir = `/tmp/front-end${process.pid}`;
     await spawnPromise('rm', ['-rf', tmpDir]);
     await spawnPromise('cp', ['-R', 'xdam_saas_fe/', tmpDir]);
@@ -64,6 +94,7 @@ exports.handler = async message => {
       ],
       {cwd: tmpDir}
     );
+    */
 
 
   } catch (error) {
@@ -133,6 +164,36 @@ exports.handler({
 */
 
 
+
+/*
+  const tmpDir = `/tmp/front-end${process.pid}`;
+
+    const npm = 'npm';
+    await spawnPromise('rm', ['-rf', tmpDir]);
+    await spawnPromise('cp', ['-R', 'react-front-end/', tmpDir]);
+    await spawnPromise(
+      npm,
+      ['--production',
+        '--no-progress',
+        '--loglevel=error',
+        '--cache', path.join('/tmp', 'npm'),
+        '--userconfig', path.join('/tmp', 'npmrc'),
+        'install'
+      ],
+      {cwd: tmpDir}
+    );
+    await spawnPromise(
+      npm,
+      ['--production',
+        '--no-progress',
+        '--loglevel=error',
+        '--cache', path.join('/tmp', 'npm'),
+        '--userconfig', path.join('/tmp', 'npmrc'),
+        'run', 'build'
+      ],
+      {cwd: tmpDir}
+    );
+    */
 
 
 
