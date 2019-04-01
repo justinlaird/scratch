@@ -49,7 +49,7 @@ exports.handler = async message => {
 
     //await spawnPromise('./node_modules/.bin/ember', ['-v']);
 
-    await spawnPromise('npx', ['ember','build']);
+    await spawnPromise('npx', ['ember','build'], {cwd: tmpDir});
 
     /*
 
