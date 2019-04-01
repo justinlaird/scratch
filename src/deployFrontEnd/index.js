@@ -34,15 +34,6 @@ exports.handler = async message => {
       {cwd: tmpDir}
     );
 
-  console.log("======LS ONE=====");
-
-    await spawnPromise('ls', ['./node_modules','-alt']);
-    console.log("======LS TWO=====");
-
-    await spawnPromise('ls', ['./node_modules/.bin','-alt']);
-
-
-
     console.log("======LS THREE=====");
 
     await spawnPromise('ls', [`${tmpDir}/node_modules/.bin`]);
