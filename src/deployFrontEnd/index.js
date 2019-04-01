@@ -25,7 +25,7 @@ exports.handler = async message => {
     await spawnPromise('cp', ['-R', 'xdam_saas_fe/', tmpDir]);
     await spawnPromise(
       npm,
-      ['--production',
+      [
         '--no-progress',
         '--loglevel=error',
         '--cache', path.join('/tmp', 'npm'),
@@ -36,7 +36,7 @@ exports.handler = async message => {
     );
     await spawnPromise(
       npm,
-      ['--production',
+      [
         '--no-progress',
         '--loglevel=error',
         '--cache', path.join('/tmp', 'npm'),
@@ -161,7 +161,6 @@ exports.handler({
     ]
   }
 });
-
 */
 
 
