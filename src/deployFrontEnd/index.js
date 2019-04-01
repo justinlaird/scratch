@@ -49,18 +49,22 @@ exports.handler = async message => {
 
     //await spawnPromise('./node_modules/.bin/ember', ['-v']);
 
-    await spawnPromise('npx', ['ember','build'], {cwd: tmpDir});
+    //await spawnPromise('npx', [ '--cache', path.join('/tmp'), 'ember','build'], {cwd: tmpDir});
 
-    /*
+
 
     await spawnPromise(
-      `${tmpDir}/node_modules/ember-cli/bin/ember`,
-      [
-        'build'
+      npm,
+      ['--production',
+        '--no-progress',
+        '--loglevel=error',
+        '--cache', path.join('/tmp', 'npm'),
+        '--userconfig', path.join('/tmp', 'npmrc'),
+        'run', 'build'
       ],
       {cwd: tmpDir}
     );
-    */
+
 
   } catch (error) {
     console.log('Error during DeployFrontEnd');
