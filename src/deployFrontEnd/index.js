@@ -33,8 +33,13 @@ exports.handler = async message => {
       ],
       {cwd: tmpDir}
     );
-    await spawnPromise('./node_modules/ember-cli/bin/ember', ['-v']);
-    //await spawnPromise('ls', ['node_modules','-alt']);
+    await spawnPromise('ls', ['./node_modules','-alt']);
+    await spawnPromise('ls', ['./node_modules/.bin','-alt']);
+    await spawnPromise('ls', ['pwd']);
+
+
+    //await spawnPromise('./node_modules/.bin/ember', ['-v']);
+
 
     /*
 
@@ -94,7 +99,7 @@ function spawnPromise (command, args, options) {
 //example test invocation
 //sam local generate-event cloudformation create-request | sam local invoke DeployFrontEnd
 
-/*
+
 exports.handler({
   "RequestType": "Create",
   "ResponseURL": "https://cloudformation-custom-resource-response-uswest2.s3-us-west-2.amazonaws.com",
@@ -111,7 +116,7 @@ exports.handler({
     ]
   }
 });
-*/
+
 
 
 
