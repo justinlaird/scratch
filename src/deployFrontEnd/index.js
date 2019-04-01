@@ -21,6 +21,7 @@ exports.handler = async message => {
     await spawnPromise('rm', ['-rf', tmpDir]);
     await spawnPromise('cp', ['-R', 'xdam_saas_fe/', tmpDir]);
 
+
     await spawnPromise(
       'npm',
       ['--production',
@@ -32,6 +33,10 @@ exports.handler = async message => {
       ],
       {cwd: tmpDir}
     );
+    await spawnPromise('./node_modules/ember-cli/bin/ember', ['-v']);
+    //await spawnPromise('ls', ['node_modules','-alt']);
+
+    /*
 
     await spawnPromise(
       `${tmpDir}/node_modules/ember-cli/bin/ember`,
@@ -40,6 +45,7 @@ exports.handler = async message => {
       ],
       {cwd: tmpDir}
     );
+    */
 
   } catch (error) {
     console.log('Error during DeployFrontEnd');
