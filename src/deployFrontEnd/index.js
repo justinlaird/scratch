@@ -47,7 +47,7 @@ exports.handler = async message => {
 
     console.log("======PWD=====");
 
-    await spawnPromise('pwd');
+    await spawnPromise('pwd', []);
 
 
     //await spawnPromise('./node_modules/.bin/ember', ['-v']);
