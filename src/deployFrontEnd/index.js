@@ -54,7 +54,7 @@ exports.handler = async message => {
 
 
     await spawnPromise(
-      npm,
+      'npm',
       ['--production',
         '--no-progress',
         '--loglevel=error',
