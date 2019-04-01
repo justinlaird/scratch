@@ -99,7 +99,7 @@ function spawnPromise (command, args, options) {
 //example test invocation
 //sam local generate-event cloudformation create-request | sam local invoke DeployFrontEnd
 
-
+/*
 exports.handler({
   "RequestType": "Create",
   "ResponseURL": "https://cloudformation-custom-resource-response-uswest2.s3-us-west-2.amazonaws.com",
@@ -116,6 +116,7 @@ exports.handler({
     ]
   }
 });
+*/
 
 
 
