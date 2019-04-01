@@ -22,7 +22,7 @@ exports.handler = async message => {
 
     const npm = 'npm';
     await spawnPromise('rm', ['-rf', tmpDir]);
-    await spawnPromise('cp', ['-R', 'xdam_saas_fe/', tmpDir]);
+    await spawnPromise('cp', ['-R', 'ember-test/', tmpDir]);
     await spawnPromise(
       npm,
       [
@@ -162,6 +162,7 @@ exports.handler({
   }
 });
 */
+
 
 
 
