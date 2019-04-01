@@ -34,11 +34,11 @@ exports.handler = async message => {
       {cwd: tmpDir}
     );
 
-    console.log("======LS THREE=====");
+    console.log("======LS ONE=====");
 
     await spawnPromise('ls', [`${tmpDir}/node_modules/.bin`]);
 
-    console.log("======LS FOUR=====");
+    console.log("======LS TWO=====");
 
     await spawnPromise('ls', [`${tmpDir}`]);
 
