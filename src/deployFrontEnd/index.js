@@ -25,10 +25,19 @@ console.log(`HOME DIR ${process.env.HOME}`);
 
     const npm = 'npm';
 
+    console.log("DF1");
+    await spawnPromise('df', ['-h']);
+    await spawnPromise('rm', ['-rf', '/tmp/front-end*']);
 
-    await spawnPromise('rm', ['-rf', tmpDir]);
+    console.log("DF2");
+    await spawnPromise('df', ['-h']);
+
+    await spawnPromise('rm', ['-rf', '/tmp/front-end*']);
     //await spawnPromise('cp', ['-R', 'ember-test/', tmpDir]);
     await spawnPromise('cp', ['-R', 'xdam_saas_fe/', tmpDir]);
+
+    console.log("DF3");
+    await spawnPromise('df', ['-h']);
 
     await spawnPromise(
       npm,
@@ -40,6 +49,10 @@ console.log(`HOME DIR ${process.env.HOME}`);
       ],
       {cwd: tmpDir}
     );
+
+    console.log("DF4");
+    await spawnPromise('df', ['-h']);
+
     await spawnPromise(
       npm,
       [ '--no-progress',
@@ -50,6 +63,10 @@ console.log(`HOME DIR ${process.env.HOME}`);
       ],
       {cwd: tmpDir}
     );
+
+    console.log("DF5");
+    await spawnPromise('df', ['-h']);
+
 
     await spawnPromise('ls', [`${tmpDir}/dist`]);
 
@@ -169,6 +186,7 @@ exports.handler({
   }
 });
 */
+
 
 
 
