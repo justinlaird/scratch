@@ -51,6 +51,8 @@ console.log(`HOME DIR ${process.env.HOME}`);
       {cwd: tmpDir}
     );
 
+    await spawnPromise('ls', [`${tmpDir}/dist`]);
+
     /*
     const tmpDir = `/tmp/front-end${process.pid}`;
     await spawnPromise('rm', ['-rf', tmpDir]);
