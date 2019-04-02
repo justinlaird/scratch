@@ -25,12 +25,12 @@ console.log(`HOME DIR ${process.env.HOME}`);
 
     const npm = 'npm';
     await spawnPromise('rm', ['-rf', tmpDir]);
-    await spawnPromise('cp', ['-R', 'ember-test/', tmpDir]);
+    //await spawnPromise('cp', ['-R', 'ember-test/', tmpDir]);
+    await spawnPromise('cp', ['-R', 'xdam_saas_fe/', tmpDir]);
 
     await spawnPromise(
       npm,
-      [
-        '--no-progress',
+      [ '--no-progress',
         '--loglevel=error',
         '--cache', path.join('/tmp', 'npm'),
         '--userconfig', path.join('/tmp', 'npmrc'),
@@ -40,8 +40,7 @@ console.log(`HOME DIR ${process.env.HOME}`);
     );
     await spawnPromise(
       npm,
-      [
-        '--no-progress',
+      [ '--no-progress',
         '--loglevel=error',
         '--cache', path.join('/tmp', 'npm'),
         '--userconfig', path.join('/tmp', 'npmrc'),

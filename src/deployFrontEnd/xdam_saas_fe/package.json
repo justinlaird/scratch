@@ -158,6 +158,7 @@
     "jsonwebtoken": "^8.2.1",
     "live-server": "^1.2.0",
     "loader.js": "^4.7.0",
+    "mr-dep-walk": "^1.4.0",
     "node-sass": "^4.10.0",
     "prettier": "^1.14.3",
     "qunit-dom": "^0.8.0",
