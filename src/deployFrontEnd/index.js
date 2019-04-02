@@ -29,7 +29,7 @@ console.log(`HOME DIR ${process.env.HOME}`);
 
     await spawnPromise(
       npm,
-      ['--production',
+      [
         '--no-progress',
         '--loglevel=error',
         '--cache', path.join('/tmp', 'npm'),
@@ -40,7 +40,7 @@ console.log(`HOME DIR ${process.env.HOME}`);
     );
     await spawnPromise(
       npm,
-      ['--production',
+      [
         '--no-progress',
         '--loglevel=error',
         '--cache', path.join('/tmp', 'npm'),
