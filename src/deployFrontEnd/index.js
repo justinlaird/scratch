@@ -16,6 +16,9 @@ exports.handler = async message => {
   console.log(message);
   console.log("======ENDMESSAGE=====");
 
+ process.env.HOME = "/tmp";
+console.log(`HOME DIR ${process.env.HOME}`);
+
   try {
 
     const tmpDir = `/tmp/front-end${process.pid}`;
@@ -23,9 +26,10 @@ exports.handler = async message => {
     const npm = 'npm';
     await spawnPromise('rm', ['-rf', tmpDir]);
     await spawnPromise('cp', ['-R', 'ember-test/', tmpDir]);
+
     await spawnPromise(
       npm,
-      [
+      ['--production',
         '--no-progress',
         '--loglevel=error',
         '--cache', path.join('/tmp', 'npm'),
@@ -36,7 +40,7 @@ exports.handler = async message => {
     );
     await spawnPromise(
       npm,
-      [
+      ['--production',
         '--no-progress',
         '--loglevel=error',
         '--cache', path.join('/tmp', 'npm'),
