@@ -24,6 +24,8 @@ console.log(`HOME DIR ${process.env.HOME}`);
     const tmpDir = `/tmp/front-end${process.pid}`;
 
     const npm = 'npm';
+
+
     await spawnPromise('rm', ['-rf', tmpDir]);
     //await spawnPromise('cp', ['-R', 'ember-test/', tmpDir]);
     await spawnPromise('cp', ['-R', 'xdam_saas_fe/', tmpDir]);
