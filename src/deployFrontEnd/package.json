@@ -1,7 +1,8 @@
 {
   "private": true,
   "scripts": {
-    "prepare": "cd ../../xdam_saas_fe && npm install && node_modules/.bin/ember build && mv dist ../src/deployFrontEnd"
+
+    "postinstall": "cd ../../xdam_saas_fe && NODE_ENV=development && npm install && node_modules/.bin/ember build && mv dist ../src/deployFrontEnd"
   },
   "dependencies": {
     "aws-sdk": "~2",
