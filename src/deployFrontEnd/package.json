@@ -1,7 +1,7 @@
 {
   "private": true,
   "scripts": {
-    "postinstall": "cd ../../xdam_saas_fe && NODE_ENV=development && npm install && npm run build && mv dist ../src/deployFrontEnd"
+    "postinstall": "cd ../../xdam_saas_fe && NODE_ENV=development && npm install &&  ls node_modules && npm run build && mv dist ../src/deployFrontEnd"
   },
   "dependencies": {
     "aws-sdk": "~2",
