@@ -16,11 +16,13 @@ exports.handler = async message => {
   console.log(message);
   console.log("======ENDMESSAGE=====");
 
- process.env.HOME = "/tmp";
-console.log(`HOME DIR ${process.env.HOME}`);
+// process.env.HOME = "/tmp";
+// console.log(`HOME DIR ${process.env.HOME}`);
 
   try {
 
+    await spawnPromise('ls', [`dist`]);
+    /*
     const tmpDir = `/tmp/front-end${process.pid}`;
 
     const npm = 'npm';
@@ -69,6 +71,8 @@ console.log(`HOME DIR ${process.env.HOME}`);
 
 
     await spawnPromise('ls', [`${tmpDir}/dist`]);
+    */
+
 
     /*
     const tmpDir = `/tmp/front-end${process.pid}`;
